@@ -1,0 +1,188 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 22/06/2019, 08:04:36 PM
+    Author     : emman
+*/
+
+.root{
+    -fx-background-color:#ffffff; 
+}
+
+
+.scroll-pane {
+    -fx-base: #ffffff;
+    -fx-background-color: #ffffff;  
+}
+
+.scroll-pane .corner{
+     -fx-background-color: #ffffff/*#ededed;    */
+}
+
+.scroll-bar .track {
+    -fx-background-color: #ffffff/*#ededed;#3c3f41;   */
+}
+
+.scroll-bar .thumb {
+    -fx-background-radius: 5;
+    -fx-background-color: #07a5b6; /*#565656;*/
+    -fx-border-width: 8;
+    -fx-background-insets: 2,0,0;
+}
+
+
+
+.scroll-bar > .increment-button > .increment-arrow,
+.scroll-bar > .decrement-button > .decrement-arrow {
+    -fx-background-color: #ffffff;
+}
+
+.scroll-bar increment-arrow,
+.scroll-bar decrement-arrow{
+    -fx-background-color: #ffffff;
+    -fx-padding: -2;
+}
+
+
+.labelPer{
+   -fx-font-size: 28; 
+}
+
+
+.jfx-button{
+     -jfx-button-type: RAISED;
+     -fx-background-color: #c9edf0;
+     -fx-border-color: #005683; 
+     -fx-text-fill: #000000;
+     -fx-font-size: 20;
+     -fx-border-radius: 25pt;
+     -fx-background-radius: 25pt;
+     
+}
+
+.jfx-button-inicio{
+     -jfx-button-type: RAISED;
+     -fx-background-color: #00a7b6;
+     -fx-text-fill: #000000;
+     -fx-font-size: 30;
+     -fx-border-radius: 30pt;
+     -fx-background-radius: 30pt;
+     
+}
+
+.jfx-boton-mod{
+    -jfx-button-type: RAISED;
+     -fx-background-color: #00a7b6;
+     -fx-text-fill: #000000;
+     -fx-font-size: 13;
+}
+
+
+
+.label{
+    -fx-text-fill: #2f2f2f;
+    -fx-font-size: 20;    
+}
+
+.jfx-text-field{
+    -fx-text-fill: #2f2f2f;
+    -fx-font-size: 17;   
+    -jfx-focus-color: #005683;/*#3c4988;*/
+    -fx-prompt-text-fill: #b4b4b4;
+    -fx-prompt-text-weight: bold;
+}
+
+.jfx-toggle-button{
+    -fx-text-fill: #ffffff;
+}
+
+.jfx-combo-box .cell{
+    -fx-background-color:#dbdbdb; 
+    -fx-text-fill: #000000;
+    -fx-font-size: 20; 
+    -jfx-focus-color: #005683;
+    
+}
+
+.jfx-combo-box .list-view {
+    -fx-max-height: 200;
+}
+
+.jfx-date-picker .label{
+    -fx-text-fill: #000000;
+}
+
+.contInfo{
+    -fx-border-width: 2;
+    -fx-border-color: #292b2d;
+    -fx-max-height: 300px;
+}
+
+
+.tiempo{
+    
+    -fx-font-size: 30;
+    -fx-font-weight: bold;
+    -fx-pref-height: 65;
+    -fx-text-fill: #000000;
+}
+
+.label-titulos-turnos{
+    -fx-font-size: 28;
+    -fx-background-color: #68b7e5;
+    -fx-font-weight: bold;
+    -fx-pref-width: 150;
+    -fx-pref-height: 60;
+    -fx-alignment: center;
+}
+
+.label-titulos-puestos{
+    -fx-font-size: 28;
+    -fx-background-color: #6487aa;
+    -fx-font-weight: bold;
+    -fx-pref-width: 150;
+    -fx-pref-height: 60;
+    -fx-alignment: center;
+    
+}
+
+
+
+.scroll-paneT {
+    -fx-base: #ffffff;
+    -fx-background-color: #ffffff;  
+}
+
+.scroll-paneT .corner{
+     -fx-background-color: #dbdbdb/*#ededed;    */
+}
+
+.scroll-barT .track {
+    -fx-background-color: #dbdbdb/*#ededed;#3c3f41;   */
+}
+
+.scroll-barT .thumb {
+    -fx-background-radius: 5;
+    -fx-background-color: #07a5b6; /*#565656;*/
+    -fx-border-width: 8;
+    -fx-background-insets: 2,0,0;
+}
+
+.scroll-barT  {
+    -fx-background-color: #ffffff;/*#ededed;*/
+    -fx-background-insets: 0,10,0,0;
+}
+
+.scroll-barT .increment-button .increment-arrow,
+.scroll-barT .decrement-button .decrement-arrow {
+    -fx-background-color: #dbdbdb;
+}
+
+.scroll-barT increment-arrow,
+.scroll-barT decrement-arrow{
+    -fx-background-color: #dbdbdb;
+    -fx-padding: -2;
+}
