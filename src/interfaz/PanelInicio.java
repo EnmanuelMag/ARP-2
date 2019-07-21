@@ -7,11 +7,13 @@ package interfaz;
 
 import com.jfoenix.controls.JFXButton;
 import static constantes.Constantes.ESPACIADO;
+import constantes.Metodos;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -35,23 +37,74 @@ public class PanelInicio {
     }
     
     
-    public VBox crearBotones(){
+    public HBox crearBotones(){
         
-        JFXButton ingreso = new JFXButton("Ingreso");
+        JFXButton ingreso = new JFXButton("Facturar");
         ingreso.getStyleClass().add("jfx-button-inicio");
-        ingreso.setOnAction(new ManejadorIngreso());
+        //ingreso.setOnAction(new ManejadorIngreso());
         
-        JFXButton consulta = new JFXButton("Consulta");
-        consulta.getStyleClass().add("jfx-button-inicio");
+        JFXButton producto = new JFXButton("Producto");
+        producto.getStyleClass().add("jfx-button-inicio");
+        producto.setOnAction(new ManejadorProducto());
         
-        JFXButton reportes = new JFXButton("Reportes");
-        reportes.getStyleClass().add("jfx-button-inicio");
+        JFXButton trabajadores = new JFXButton("Trabajadores");
+        trabajadores.getStyleClass().add("jfx-button-inicio");
+        trabajadores.setOnAction(new ManejadorTrabajadores());
         
-        VBox contenedor = new VBox(ingreso, consulta, reportes);
-        contenedor.setSpacing(60);
-        contenedor.setAlignment(Pos.CENTER);
+        JFXButton proveedores = new JFXButton("Proveedores");
+        proveedores.getStyleClass().add("jfx-button-inicio");
+        proveedores.setOnAction(new ManejadorProveedores());
         
-        return contenedor;
+        VBox contIzq = new VBox(ingreso, producto, trabajadores, proveedores);
+        contIzq.setSpacing(60);
+        contIzq.setAlignment(Pos.CENTER);
+        
+        JFXButton inventario = new JFXButton("Inventario");
+        inventario.getStyleClass().add("jfx-button-inicio");
+        //ingreso.setOnAction(new ManejadorIngreso());
+        
+        JFXButton pedidos = new JFXButton("Pedidos");
+        pedidos.getStyleClass().add("jfx-button-inicio");
+        
+        JFXButton estadisticas = new JFXButton("Estadisticas");
+        estadisticas.getStyleClass().add("jfx-button-inicio");
+        
+        JFXButton reporte = new JFXButton("Reportes");
+        reporte.getStyleClass().add("jfx-button-inicio");
+        
+        VBox contDer = new VBox(inventario, pedidos, estadisticas, reporte);
+        contDer.setSpacing(60);
+        contDer.setAlignment(Pos.CENTER);
+        
+        HBox cont = Metodos.crearPanel(contIzq, contDer);
+        cont.setAlignment(Pos.CENTER);
+        cont.setSpacing(150);
+        cont.setPadding(ESPACIADO);
+        return cont;
+    }
+    
+    public class ManejadorProveedores implements EventHandler{
+        @Override
+        public void handle(Event event) {
+            PanelProveedorRegistro pR = new PanelProveedorRegistro(pStage);
+            pStage.setScene(pR.getScene());
+        }
+    }
+    
+    public class ManejadorTrabajadores implements EventHandler{
+        @Override
+        public void handle(Event event) {
+            PanelTrabajadorRegistro pR = new PanelTrabajadorRegistro(pStage);
+            pStage.setScene(pR.getScene());
+        }
+    }
+    
+    public class ManejadorProducto implements EventHandler{
+        @Override
+        public void handle(Event event) {
+            PanelProductoRegistro pR = new PanelProductoRegistro(pStage);
+            pStage.setScene(pR.getScene());
+        }
     }
     
     public class ManejadorIngreso implements EventHandler{

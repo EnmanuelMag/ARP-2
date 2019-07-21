@@ -12,7 +12,7 @@ import javafx.stage.Stage;
  *
  * @author emman
  */
-public class FrancisPan extends Application {
+public class ARP_2 extends Application {
     
     @Override
     public void start(Stage primaryStage) {

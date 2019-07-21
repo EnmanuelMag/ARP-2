@@ -26,9 +26,9 @@ import javafx.stage.Stage;
  *
  * @author emman
  */
-public class PanelProveedorRegistro extends PanelGenerico{
+public class PanelTrabajadorRegistro extends PanelGenerico{
     
-    public PanelProveedorRegistro(Stage s){
+    public PanelTrabajadorRegistro(Stage s){
         super(s);
         super.border.setCenter(crearFormulario());
     }
@@ -41,24 +41,36 @@ public class PanelProveedorRegistro extends PanelGenerico{
         nombre.setPromptText("Nombre");
         nombre.setLabelFloat(true);
         
-        JFXTextField ruc = new JFXTextField();
-        ruc.setPromptText("RUC");
-        ruc.setLabelFloat(true);
+        JFXTextField apellido = new JFXTextField();
+        apellido.setPromptText("Apellido");
+        apellido.setLabelFloat(true);
+                
+        JFXTextField cedula = new JFXTextField();
+        cedula.setPromptText("Cédula");
+        cedula.setLabelFloat(true);
         
-        VBox cont1 = new VBox(nombre, ruc);
+        JFXTextField descuento = new JFXTextField();
+        descuento.setPromptText("Descuento");
+        descuento.setLabelFloat(true);
+        
+        VBox cont1 = new VBox(nombre, apellido, cedula, descuento);
         cont1.setSpacing(65);
         cont1.setMaxWidth(400);
         cont1.setAlignment(Pos.CENTER);
-                
-        JFXTextField ciudad = new JFXTextField();
-        ciudad.setPromptText("Ciudad");
-        ciudad.setLabelFloat(true);
         
-        JFXTextField telefono = new JFXTextField();
-        telefono.setPromptText("Teléfono");
-        telefono.setLabelFloat(true);
+        JFXComboBox tipoBox = new JFXComboBox();
+        //categBox.setItems(); aqui deberiamos hacer un Query y traer todoso lo nombres de las categorias
+        HBox contBox = Metodos.crearPanel(new Label("Tipo"), tipoBox);
         
-        VBox cont2 = new VBox(ciudad, telefono);
+        JFXComboBox estadoBox = new JFXComboBox();
+        //categBox.setItems(); aqui deberiamos hacer un Query y traer todoso lo nombres de las categorias
+        HBox contBox2 = Metodos.crearPanel(new Label("Estado"), estadoBox);
+        
+        JFXTextField saldo = new JFXTextField();
+        saldo.setPromptText("Saldo");
+        saldo.setLabelFloat(true);
+        
+        VBox cont2 = new VBox(contBox, contBox2, saldo);
         cont2.setSpacing(65);
         cont2.setMaxWidth(400);
         cont2.setAlignment(Pos.CENTER);
@@ -72,11 +84,7 @@ public class PanelProveedorRegistro extends PanelGenerico{
         c.setAlignment(Pos.CENTER);
         border.setBottom(c);
         
-        HBox contRoot = new HBox(contMain, cont2);
-        contRoot.setAlignment(Pos.CENTER);
-        contRoot.setSpacing(55);
-        contRoot.setMaxWidth(500);
-        return contRoot;
+        return contMain;
     }
     
     public class ManejadorVolver implements EventHandler{

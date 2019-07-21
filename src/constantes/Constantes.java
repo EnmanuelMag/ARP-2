@@ -17,7 +17,7 @@ public class Constantes {
     
     
     public static final Insets ESPACIADO = new Insets(20,20,20,20);
-    public static final Insets BOTON = new Insets(15,8,15,8);
+    public static final Insets BOTON = new Insets(15,15,15,15);
     public static final Insets BOTONA = new Insets(5,5,5,5);
     public static final ObservableList<String> TABLAS = FXCollections.observableArrayList("Cliente", 
             "Factura", "Producto", "Categoria", "Proveedor", "Materia Prima");

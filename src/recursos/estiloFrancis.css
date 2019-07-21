@@ -57,7 +57,7 @@ and open the template in the editor.
      -fx-background-color: #c9edf0;
      -fx-border-color: #005683; 
      -fx-text-fill: #000000;
-     -fx-font-size: 20;
+     -fx-font-size: 14;
      -fx-border-radius: 25pt;
      -fx-background-radius: 25pt;
      
@@ -65,11 +65,13 @@ and open the template in the editor.
 
 .jfx-button-inicio{
      -jfx-button-type: RAISED;
-     -fx-background-color: #00a7b6;
+     -fx-background-color: #7dd4dc;
      -fx-text-fill: #000000;
      -fx-font-size: 30;
      -fx-border-radius: 30pt;
+     -fx-border-width: 2pt;
      -fx-background-radius: 30pt;
+     -fx-pref-width: 270px;
      
 }
 
