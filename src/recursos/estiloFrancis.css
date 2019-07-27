@@ -52,7 +52,7 @@ and open the template in the editor.
 }
 
 
-.jfx-button{
+.jfx-button {
      -jfx-button-type: RAISED;
      -fx-background-color: #c9edf0;
      -fx-border-color: #005683; 
@@ -90,6 +90,16 @@ and open the template in the editor.
 }
 
 .jfx-text-field{
+    
+    -fx-text-fill: #2f2f2f;
+    -fx-font-size: 17;   
+    -jfx-focus-color: #005683;/*#3c4988;*/
+    -fx-prompt-text-fill: #b4b4b4;
+    -fx-prompt-text-weight: bold;
+    
+}
+.jfx-texto-largo{
+    -fx-min-width: 130;
     -fx-text-fill: #2f2f2f;
     -fx-font-size: 17;   
     -jfx-focus-color: #005683;/*#3c4988;*/
@@ -98,7 +108,8 @@ and open the template in the editor.
 }
 
 .jfx-toggle-button{
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: #2f2f2f;
+    -fx-font-size: 17;   
 }
 
 .jfx-combo-box .cell{

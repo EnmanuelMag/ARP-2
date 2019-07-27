@@ -127,12 +127,12 @@ public class PanelFacturaRegistro {
         c.setPadding(BOTON);
         this.rootBorder.setBottom(c);
         
-        JFXButton volver = new JFXButton("Volver");
+        /*JFXButton volver = new JFXButton("Volver");
         VBox c2 = new VBox(volver);
         c2.setPadding(BOTON);
         volver.setOnAction(new ManejadorVolver());
         this.rootBorder.setTop(c2);
-        
+        */
         VBox contRoot = new VBox(contMain, cc);
         contRoot.setAlignment(Pos.CENTER);
         contRoot.setMaxHeight(700);
@@ -220,17 +220,6 @@ public class PanelFacturaRegistro {
     }
     
     
-    public class ManejadorVolver implements EventHandler{
-        
-        
-        @Override
-        public void handle(Event event) {
-            
-            PanelRegistro pR = new PanelRegistro(pStage);
-            pStage.setScene(pR.getScene());
-        }
-    }
-    
     public Scene getScene(){
         
         Scene escena=new Scene(getRoot(),1280,720);
@@ -243,6 +232,6 @@ public class PanelFacturaRegistro {
     }
     
     public String getRutaCssFile(){
-        return PanelRegistro.class.getResource("/recursos/estiloFrancis.css").toExternalForm();
+        return Class.class.getResource("/recursos/estiloFrancis.css").toExternalForm();
     }
 }

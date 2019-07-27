@@ -56,24 +56,14 @@ public class PanelCategoriaRegistro {
         c.setAlignment(Pos.CENTER);
         this.rootBorder.setBottom(c);
         
-        JFXButton volver = new JFXButton("Volver");
+        /*JFXButton volver = new JFXButton("Volver");
         VBox c2 = new VBox(volver);
         volver.setOnAction(new ManejadorVolver());
         this.rootBorder.setTop(c2);
-        
+        */
         return cont1;
     }
     
-    public class ManejadorVolver implements EventHandler{
-        
-        
-        @Override
-        public void handle(Event event) {
-            
-            PanelRegistro pR = new PanelRegistro(pStage);
-            pStage.setScene(pR.getScene());
-        }
-    }
     
     public Scene getScene(){
         
@@ -87,6 +77,6 @@ public class PanelCategoriaRegistro {
     }
     
     public String getRutaCssFile(){
-        return PanelRegistro.class.getResource("/recursos/estiloFrancis.css").toExternalForm();
+        return Class.class.getResource("/recursos/estiloFrancis.css").toExternalForm();
     }
 }

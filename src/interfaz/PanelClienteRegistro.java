@@ -8,7 +8,10 @@ package interfaz;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXToggleButton;
 import static constantes.Constantes.ESPACIADO;
+import static constantes.Constantes.TEXTS;
+import static constantes.Constantes.TIPO_CLIENTES;
 import constantes.Metodos;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -26,18 +29,11 @@ import javafx.stage.Stage;
  *
  * @author emman
  */
-public class PanelClienteRegistro {
+public class PanelClienteRegistro extends PanelGenerico{
     
-    private BorderPane rootBorder;
-    private StackPane root;
-    private Stage pStage;
-    
-    public PanelClienteRegistro(Stage p){
-        this.pStage = p;
-        this.rootBorder = new BorderPane();
-        this.rootBorder.setPadding(ESPACIADO);
-        this.rootBorder.setCenter(crearFormulario());
-        this.root = new StackPane(rootBorder);
+    public PanelClienteRegistro(Stage s,StackPane lastRoot){
+        super(s,lastRoot);
+        super.border.setCenter(crearFormulario());
     }
     
     
@@ -46,57 +42,82 @@ public class PanelClienteRegistro {
         
         JFXTextField nombre = new JFXTextField();
         nombre.setPromptText("Nombre");
+        nombre.getStyleClass().add("jfx-texto-largo");
+        nombre.setMinWidth(TEXTS);
+        nombre.setPrefWidth(TEXTS);
         nombre.setLabelFloat(true);
         
         JFXTextField apellido = new JFXTextField();
+        apellido.getStyleClass().add("jfx-texto-largo");
         apellido.setPromptText("Apellido");
         apellido.setLabelFloat(true);
-        
-        VBox cont1 = new VBox(nombre, apellido);
-        cont1.setSpacing(65);
-        cont1.setMaxWidth(400);
-        cont1.setAlignment(Pos.CENTER);
+        apellido.setMinWidth(TEXTS);
                 
-        JFXTextField direccion = new JFXTextField();
-        direccion.setPromptText("Dirección");
-        direccion.setLabelFloat(true);
-        
         JFXTextField cedula = new JFXTextField();
         cedula.setPromptText("Cédula");
         cedula.setLabelFloat(true);
         
-        VBox cont2 = new VBox(cedula, direccion);
+        JFXTextField descuento = new JFXTextField();
+        descuento.setPromptText("Descuento");
+        descuento.setLabelFloat(true);
+        
+        JFXTextField direccion = new JFXTextField();
+        direccion.setPromptText("Dirección");
+        direccion.getStyleClass().add("jfx-texto-largo");
+        direccion.setMinWidth(TEXTS);
+        direccion.setPrefWidth(TEXTS);
+        direccion.setLabelFloat(true);
+        
+        JFXTextField telefono = new JFXTextField();
+        telefono.setPromptText("Teléfono");
+        telefono.setMaxWidth(160);
+        telefono.setLabelFloat(true);
+        
+        VBox cont1 = new VBox(nombre, apellido, cedula, descuento);
+        cont1.setSpacing(65);
+       
+        cont1.setAlignment(Pos.TOP_LEFT);
+        
+        JFXComboBox tipoBox = new JFXComboBox();
+        tipoBox.setItems(TIPO_CLIENTES); 
+        HBox contBox = Metodos.crearPanel(new Label("Tipo"), tipoBox);
+        
+        JFXToggleButton estado = new JFXToggleButton();
+        estado.setText("Inactivo");
+        estado.setOnAction((e) -> {
+            
+            if(estado.isSelected()){
+                estado.setText("Activo");
+            }
+            else{
+                estado.setText("Inactivo");
+            }
+        
+        });
+        
+        JFXTextField saldo = new JFXTextField();
+        saldo.setPromptText("Saldo");
+        saldo.setMaxWidth(150);
+        saldo.setLabelFloat(true);
+        
+        VBox cont2 = new VBox(direccion, telefono, contBox, estado, saldo);
         cont2.setSpacing(65);
-        cont2.setMaxWidth(400);
-        cont2.setAlignment(Pos.CENTER);
+        
+        cont2.setAlignment(Pos.TOP_LEFT);
         
         HBox contMain = Metodos.crearPanel(cont1, cont2);
+        contMain.setMaxHeight(380);
         contMain.setSpacing(40);
         contMain.setAlignment(Pos.CENTER);
         
         JFXButton registrar = new JFXButton("Registrar");
         VBox c = new VBox(registrar);
         c.setAlignment(Pos.CENTER);
-        this.rootBorder.setBottom(c);
-        
-        JFXButton volver = new JFXButton("Volver");
-        VBox c2 = new VBox(volver);
-        volver.setOnAction(new ManejadorVolver());
-        this.rootBorder.setTop(c2);
+        border.setBottom(c);
         
         return contMain;
     }
     
-    public class ManejadorVolver implements EventHandler{
-        
-        
-        @Override
-        public void handle(Event event) {
-            
-            PanelRegistro pR = new PanelRegistro(pStage);
-            pStage.setScene(pR.getScene());
-        }
-    }
     
     public Scene getScene(){
         
@@ -110,6 +131,6 @@ public class PanelClienteRegistro {
     }
     
     public String getRutaCssFile(){
-        return PanelRegistro.class.getResource("/recursos/estiloFrancis.css").toExternalForm();
+        return PanelClienteRegistro.class.getResource("/recursos/estiloFrancis.css").toExternalForm();
     }
 }

@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import static constantes.Constantes.ESPACIADO;
+import static constantes.Constantes.TEXTS;
 import constantes.Metodos;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -28,8 +29,8 @@ import javafx.stage.Stage;
  */
 public class PanelProveedorRegistro extends PanelGenerico{
     
-    public PanelProveedorRegistro(Stage s){
-        super(s);
+    public PanelProveedorRegistro(Stage s,StackPane lastRoot){
+        super(s,lastRoot);
         super.border.setCenter(crearFormulario());
     }
     
@@ -39,6 +40,7 @@ public class PanelProveedorRegistro extends PanelGenerico{
         
         JFXTextField nombre = new JFXTextField();
         nombre.setPromptText("Nombre");
+        nombre.setMinWidth(TEXTS);
         nombre.setLabelFloat(true);
         
         JFXTextField ruc = new JFXTextField();
@@ -46,22 +48,26 @@ public class PanelProveedorRegistro extends PanelGenerico{
         ruc.setLabelFloat(true);
         
         VBox cont1 = new VBox(nombre, ruc);
-        cont1.setSpacing(65);
-        cont1.setMaxWidth(400);
-        cont1.setAlignment(Pos.CENTER);
-                
-        JFXTextField ciudad = new JFXTextField();
-        ciudad.setPromptText("Ciudad");
-        ciudad.setLabelFloat(true);
+        cont1.setSpacing(90);
+        //cont1.setMaxWidth(400);
+        cont1.setAlignment(Pos.TOP_LEFT);
+        
+        JFXTextField direccion = new JFXTextField();
+        direccion.setPromptText("Dirección");
+        direccion.getStyleClass().add("jfx-texto-largo");
+        direccion.setMinWidth(TEXTS);
+        direccion.setPrefWidth(TEXTS);
+        direccion.setLabelFloat(true);
         
         JFXTextField telefono = new JFXTextField();
         telefono.setPromptText("Teléfono");
+        telefono.setMaxWidth(150);
         telefono.setLabelFloat(true);
         
-        VBox cont2 = new VBox(ciudad, telefono);
-        cont2.setSpacing(65);
-        cont2.setMaxWidth(400);
-        cont2.setAlignment(Pos.CENTER);
+        VBox cont2 = new VBox(direccion, telefono);
+        cont2.setSpacing(90);
+        //cont2.setMaxWidth(400);
+        cont2.setAlignment(Pos.TOP_LEFT);
         
         HBox contMain = Metodos.crearPanel(cont1, cont2);
         contMain.setSpacing(40);
@@ -73,22 +79,13 @@ public class PanelProveedorRegistro extends PanelGenerico{
         border.setBottom(c);
         
         HBox contRoot = new HBox(contMain, cont2);
+        contRoot.setMaxHeight(200);
         contRoot.setAlignment(Pos.CENTER);
         contRoot.setSpacing(55);
-        contRoot.setMaxWidth(500);
+        //contRoot.setMaxWidth(500);
         return contRoot;
     }
     
-    public class ManejadorVolver implements EventHandler{
-        
-        
-        @Override
-        public void handle(Event event) {
-            
-            PanelRegistro pR = new PanelRegistro(stage);
-            stage.setScene(pR.getScene());
-        }
-    }
     
     public Scene getScene(){
         
@@ -102,6 +99,6 @@ public class PanelProveedorRegistro extends PanelGenerico{
     }
     
     public String getRutaCssFile(){
-        return PanelRegistro.class.getResource("/recursos/estiloFrancis.css").toExternalForm();
+        return Class.class.getResource("/recursos/estiloFrancis.css").toExternalForm();
     }
 }

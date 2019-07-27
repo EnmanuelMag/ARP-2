@@ -6,21 +6,22 @@
 package interfaz;
 
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 /**
  *
  * @author emman
  */
 public class ARP_2 extends Application {
+    private Stage primaryStage;
     
     @Override
     public void start(Stage primaryStage) {
-        
+        this.primaryStage=primaryStage;
         PanelInicio pI = new PanelInicio(primaryStage);
-   
         primaryStage.setTitle("Administrador FRANCIS PAN");
-        primaryStage.setScene(pI.getScene());
+        primaryStage.setScene(new Scene(pI.getRoot(),1280,720));
+        primaryStage.getScene().getStylesheets().add(getRutaCssFile());
         primaryStage.show();
     }
 
@@ -29,6 +30,10 @@ public class ARP_2 extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+    }
+    
+     public String getRutaCssFile(){
+        return PanelInicio.class.getResource("/recursos/estiloFrancis.css").toExternalForm();
     }
     
 }

@@ -26,14 +26,17 @@ public class PanelGenerico {
     protected StackPane root;
     protected BorderPane border;
     protected Stage stage;
+    protected StackPane lastRoot;
     
-    public PanelGenerico(Stage s){
+    public PanelGenerico(Stage s,StackPane lastRoot){
         this.stage = s;
-        
+        this.lastRoot=lastRoot;
         this.volver = new JFXButton("Volver");
         volver.setPadding(BOTON);
         volver.setAlignment(Pos.TOP_RIGHT);
-        //volver.setOnAction(new ManejadorVolver());
+        volver.setOnAction((y)->{
+            s.getScene().setRoot(lastRoot);
+        });
     
         this.mPrin = new JFXButton("Menú Principal");
         this.mPrin.setOnAction(new ManejadorPrincipal());
@@ -52,10 +55,30 @@ public class PanelGenerico {
         
         @Override
         public void handle(Event event) {
-            
-            PanelRegistro pR = new PanelRegistro(stage);
-            stage.setScene(pR.getScene());
+            PanelInicio pi=new PanelInicio(stage);
+            stage.getScene().setRoot(pi.getRoot());
+            //PanelRegistro pR = new PanelRegistro(stage);
+            ///stage.setScene(pR.getScene());
         }
     }
+    
+    public class ManejadorVolver implements EventHandler{
+         
+        @Override
+        public void handle(Event event) {
+            stage.getScene().setRoot(lastRoot);
+            //PanelRegistro pR = new PanelRegistro(stage);
+            ///stage.setScene(pR.getScene());
+        }
+    }
+
+    public StackPane getRoot() {
+        return root;
+    }
+
+    public void setRoot(StackPane root) {
+        this.root = root;
+    }
+    
     
 }

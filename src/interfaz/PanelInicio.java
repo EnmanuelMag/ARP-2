@@ -71,7 +71,7 @@ public class PanelInicio {
         
         JFXButton reporte = new JFXButton("Reportes");
         reporte.getStyleClass().add("jfx-button-inicio");
-        
+        reporte.setOnAction(new ManejadorG());
         VBox contDer = new VBox(inventario, pedidos, estadisticas, reporte);
         contDer.setSpacing(60);
         contDer.setAlignment(Pos.CENTER);
@@ -86,32 +86,33 @@ public class PanelInicio {
     public class ManejadorProveedores implements EventHandler{
         @Override
         public void handle(Event event) {
-            PanelProveedorRegistro pR = new PanelProveedorRegistro(pStage);
-            pStage.setScene(pR.getScene());
+            PanelProveedorRegistro pR = new PanelProveedorRegistro(pStage,root);
+            pStage.getScene().setRoot(pR.getRoot());
+           
         }
     }
     
     public class ManejadorTrabajadores implements EventHandler{
         @Override
         public void handle(Event event) {
-            PanelTrabajadorRegistro pR = new PanelTrabajadorRegistro(pStage);
-            pStage.setScene(pR.getScene());
+            PanelClienteRegistro pR = new PanelClienteRegistro(pStage,root);
+            pStage.getScene().setRoot(pR.getRoot());
         }
     }
     
     public class ManejadorProducto implements EventHandler{
         @Override
         public void handle(Event event) {
-            PanelProductoRegistro pR = new PanelProductoRegistro(pStage);
-            pStage.setScene(pR.getScene());
+            PanelProductoRegistro pR = new PanelProductoRegistro(pStage,root);
+            pStage.getScene().setRoot(pR.getRoot());
         }
     }
     
-    public class ManejadorIngreso implements EventHandler{
+   public class ManejadorG implements EventHandler{
         @Override
         public void handle(Event event) {
-            PanelRegistro pR = new PanelRegistro(pStage);
-            pStage.setScene(pR.getScene());
+            PanelGenerico pR = new PanelGenerico(pStage,root);
+            pStage.getScene().setRoot(pR.getRoot());
         }
     }
     
