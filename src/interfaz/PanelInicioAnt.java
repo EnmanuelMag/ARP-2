@@ -66,11 +66,13 @@ public class PanelInicio {
         JFXButton pedidos = new JFXButton("Pedidos");
         pedidos.getStyleClass().add("jfx-button-inicio");
         
+        JFXButton estadisticas = new JFXButton("Estadisticas");
+        estadisticas.getStyleClass().add("jfx-button-inicio");
+        
         JFXButton reporte = new JFXButton("Reportes");
         reporte.getStyleClass().add("jfx-button-inicio");
-        reporte.setOnAction(new ManejadorReportes());
-        
-        VBox contDer = new VBox(inventario, pedidos, reporte);
+        reporte.setOnAction(new ManejadorG());
+        VBox contDer = new VBox(inventario, pedidos, estadisticas, reporte);
         contDer.setSpacing(60);
         contDer.setAlignment(Pos.CENTER);
         
@@ -106,10 +108,10 @@ public class PanelInicio {
         }
     }
     
-   public class ManejadorReportes implements EventHandler{
+   public class ManejadorG implements EventHandler{
         @Override
         public void handle(Event event) {
-            PanelReporteVentas pR = new PanelReporteVentas(pStage,root);
+            PanelGenerico pR = new PanelGenerico(pStage,root);
             pStage.getScene().setRoot(pR.getRoot());
         }
     }
