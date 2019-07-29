@@ -23,9 +23,11 @@ public class Constantes {
     public static final ObservableList<String> TIPO_CLIENTES = 
             FXCollections.observableArrayList("AMBULANTE", "CANILLITAS", "DISTRIBUIDOR");
     public static final ObservableList<String> CATG_PRODUCTOS = 
-            FXCollections.observableArrayList("Helado", "Conos", "Jalea", "Servilletas");
+            FXCollections.observableArrayList("HELADO", "CONO", "JALEA", "OTROS");
     public static final Insets BOTONA = new Insets(7,7,7,7);
     public static final ObservableList<String> TABLAS = FXCollections.observableArrayList("Cliente", 
             "Factura", "Producto", "Categoria", "Proveedor", "Materia Prima");
-    
+    public static final String DataBaseURL="jdbc:mysql://localhost/alertas?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    public static final String DataBaseUser="root";
+    public static final String DataBasePass="root";
 }

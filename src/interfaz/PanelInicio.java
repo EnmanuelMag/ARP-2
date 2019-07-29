@@ -6,6 +6,7 @@
 package interfaz;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
 import static constantes.Constantes.ESPACIADO;
 import constantes.Metodos;
 import javafx.event.Event;
@@ -27,6 +28,7 @@ public class PanelInicio {
     private BorderPane rootBorder;
     private StackPane root;
     private Stage pStage;
+    private JFXDialog dialogo;
     
     public PanelInicio(Stage p){
         this.pStage = p;
@@ -39,23 +41,81 @@ public class PanelInicio {
     
     public HBox crearBotones(){
         
-        JFXButton ingreso = new JFXButton("Facturar");
-        ingreso.getStyleClass().add("jfx-button-inicio");
-        //ingreso.setOnAction(new ManejadorIngreso());
+        JFXButton facturas = new JFXButton("Facturar");
+        facturas.getStyleClass().add("jfx-button-inicio");
+        facturas.setOnAction(e -> {
+           
+            JFXButton registrar = new JFXButton("Registrar");
+            registrar.getStyleClass().add("jfx-button-subIncio"); 
+            
+            JFXButton consultar = new JFXButton("Consultar");
+            consultar.getStyleClass().add("jfx-button-subIncio");
+            
+            HBox cont = new HBox(registrar, consultar);
+            cont.setAlignment(Pos.CENTER);
+            cont.setSpacing(20);
+            dialogo = Metodos.dialogoMaterial(root, "Selecione una acción a realizar (Factura)", cont);
+            
+        });
         
         JFXButton producto = new JFXButton("Producto");
         producto.getStyleClass().add("jfx-button-inicio");
-        producto.setOnAction(new ManejadorProducto());
-        
-        JFXButton trabajadores = new JFXButton("Trabajadores");
-        trabajadores.getStyleClass().add("jfx-button-inicio");
-        trabajadores.setOnAction(new ManejadorTrabajadores());
+        producto.setOnAction(e -> {
+            
+            JFXButton consultar = new JFXButton("Consultar");
+            consultar.getStyleClass().add("jfx-button-subIncio");
+            
+            JFXButton registrar = new JFXButton("Registrar");
+            registrar.getStyleClass().add("jfx-button-subIncio");
+            registrar.setOnAction(new ManejadorRegistroProducto());
+            
+            JFXButton modificar = new JFXButton("Modificar");
+            modificar.getStyleClass().add("jfx-button-subIncio");
+            
+            HBox cont = new HBox(consultar, registrar, modificar);
+            cont.setAlignment(Pos.CENTER);
+            cont.setSpacing(20);
+            dialogo = Metodos.dialogoMaterial(root, "Selecione una acción a realizar (Producto)", cont);
+            
+        });
+          
+        JFXButton clientes = new JFXButton("Clientes");
+        clientes.getStyleClass().add("jfx-button-inicio");
+        clientes.setOnAction(e -> {
+           
+            JFXButton registrar = new JFXButton("Registrar");
+            registrar.getStyleClass().add("jfx-button-subIncio");
+            registrar.setOnAction(new ManejadorRegistroClientes());
+            
+            JFXButton modificar = new JFXButton("Modificar");
+            modificar.getStyleClass().add("jfx-button-subIncio");
+            
+            HBox cont = new HBox(registrar, modificar);
+            cont.setAlignment(Pos.CENTER);
+            cont.setSpacing(20);
+            dialogo = Metodos.dialogoMaterial(root, "Selecione una acción a realizar (Cliente)", cont);
+            
+        });
         
         JFXButton proveedores = new JFXButton("Proveedores");
         proveedores.getStyleClass().add("jfx-button-inicio");
-        proveedores.setOnAction(new ManejadorProveedores());
+        proveedores.setOnAction(e -> {
+
+            JFXButton registrar = new JFXButton("Registrar");
+            registrar.getStyleClass().add("jfx-button-subIncio");
+            registrar.setOnAction(new ManejadorRegistroProveedores());
+            
+            JFXButton modificar = new JFXButton("Modificar");
+            modificar.getStyleClass().add("jfx-button-subIncio");
+            
+            HBox cont = new HBox(registrar, modificar);
+            cont.setAlignment(Pos.CENTER);
+            cont.setSpacing(20);
+            dialogo = Metodos.dialogoMaterial(root, "Selecione una acción a realizar (Proveedores)", cont);
+            
+        });
         
-        VBox contIzq = new VBox(ingreso, producto, trabajadores, proveedores);
+        VBox contIzq = new VBox(facturas, producto, clientes, proveedores);
         contIzq.setSpacing(60);
         contIzq.setAlignment(Pos.CENTER);
         
@@ -70,7 +130,11 @@ public class PanelInicio {
         reporte.getStyleClass().add("jfx-button-inicio");
         reporte.setOnAction(new ManejadorReportes());
         
-        VBox contDer = new VBox(inventario, pedidos, reporte);
+        JFXButton ordenes = new JFXButton("Ordenes");
+        ordenes.getStyleClass().add("jfx-button-inicio");
+        //ordenes.setOnAction(new ManejadorReportes());
+        
+        VBox contDer = new VBox(inventario, pedidos, reporte, ordenes);
         contDer.setSpacing(60);
         contDer.setAlignment(Pos.CENTER);
         
@@ -81,26 +145,32 @@ public class PanelInicio {
         return cont;
     }
     
-    public class ManejadorProveedores implements EventHandler{
+    public class ManejadorRegistroProveedores implements EventHandler{
         @Override
         public void handle(Event event) {
+            dialogo.close();
             PanelProveedorRegistro pR = new PanelProveedorRegistro(pStage,root);
             pStage.getScene().setRoot(pR.getRoot());
            
         }
     }
     
-    public class ManejadorTrabajadores implements EventHandler{
+    public class ManejadorRegistroClientes implements EventHandler{
         @Override
         public void handle(Event event) {
+            dialogo.close();
             PanelClienteRegistro pR = new PanelClienteRegistro(pStage,root);
             pStage.getScene().setRoot(pR.getRoot());
         }
     }
     
-    public class ManejadorProducto implements EventHandler{
+    public class ManejadorRegistroProducto implements EventHandler{
+        
+        
         @Override
         public void handle(Event event) {
+            
+            dialogo.close();
             PanelProductoRegistro pR = new PanelProductoRegistro(pStage,root);
             pStage.getScene().setRoot(pR.getRoot());
         }

@@ -44,14 +44,15 @@ public class PanelGenerico {
         mPrin.setPadding(BOTON);
         
         this.border = new BorderPane();
+        
         border.setPadding(ESPACIADO);
         border.setLeft(volver);
         border.setRight(mPrin);
         this.root = new StackPane(border);
+        root.setAlignment(Pos.CENTER);
     }
     
     public class ManejadorPrincipal implements EventHandler{
-        
         
         @Override
         public void handle(Event event) {
@@ -79,6 +80,11 @@ public class PanelGenerico {
     public void setRoot(StackPane root) {
         this.root = root;
     }
+
+    public BorderPane getBorder() {
+        return border;
+    }
+    
     
     
 }

@@ -5,8 +5,11 @@
  */
 package interfaz;
 
+import com.jfoenix.controls.JFXAlert;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXDialog;
+import constantes.Metodos;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -86,25 +89,29 @@ public class PanelReporteVentas extends PanelGenerico {
         
         JFXButton opcion4=new JFXButton("Ventas por fecha");
         opcion4.setOnAction((r)->{
+            
+            GridPane g=new GridPane();
+            
             JFXDatePicker dPickerDesde=new JFXDatePicker();
             dPickerDesde.setPromptText("Desde");
             JFXDatePicker dPickerHasta=new JFXDatePicker();
             dPickerHasta.setPromptText("Hasta");
-            gridOpciones.add(new Label("Desde"),1,4);
-            gridOpciones.add(dPickerDesde,2,4);
-            gridOpciones.add(new Label("Hasta"),3,4);
-            gridOpciones.add(dPickerHasta,4,4);
             JFXButton bConsulta=new JFXButton("Consultar");
             gridOpciones.add(bConsulta,5,4);
+            g.addColumn(0,new Label("Desde"),dPickerDesde);
+            g.addColumn(1,new Label("Hasta"),dPickerHasta);
+            //g.addColumn(2,bConsulta);
             
-           
             bConsulta.setOnAction((w)->{
-                LocalDateTime inicioAño=dPickerDesde.getValue().atStartOfDay();
-                LocalDateTime finAño=inicioAño.plusDays(1);
-                SubPanelReporteVentas sub=new SubPanelReporteVentas(stage,root,inicioAño,finAño);
+                LocalDateTime inicio=dPickerDesde.getValue().atStartOfDay();
+                LocalDateTime fin=inicio.plusDays(1);
+                SubPanelReporteVentas sub=new SubPanelReporteVentas(stage,root,inicio,fin);
                 sub.setSubtitulo("FECHA ESCOGIDA");
                 stage.getScene().setRoot(sub.getRoot());
             });
+            
+            Metodos.dialogoMaterial(root, "Seleccione un intervalo de fecha", g, bConsulta);
+            
             });
         
         

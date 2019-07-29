@@ -70,7 +70,7 @@ public class SubPanelReporteVentas extends PanelGenerico {
         TableColumn<VentaPorCliente,String> cApellidos=new TableColumn<>("Apellidos");
         cApellidos.setPrefWidth(150);
         cCliente.getColumns().addAll(cNombres,cApellidos);
-        TableColumn<VentaPorCliente,String> cMonto=new TableColumn<>("Monto Total"); 
+        TableColumn<VentaPorCliente,Double> cMonto=new TableColumn<>("Monto Total"); 
         cMonto.setPrefWidth(300);
         tablaTotales.setPrefWidth(800);
         tablaTotales.setPrefHeight(900);
