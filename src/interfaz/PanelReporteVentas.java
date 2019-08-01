@@ -23,6 +23,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import sistema.Factura;
 
@@ -39,7 +40,10 @@ public class PanelReporteVentas extends PanelGenerico {
        
 
     public PanelReporteVentas(Stage s, StackPane lastRoot) {
+        
         super(s, lastRoot);
+        super.stage.getScene().getStylesheets().clear();
+        super.stage.getScene().getStylesheets().add(getRutaCssFile());
         setTop();
         setCenter();
     }
@@ -61,6 +65,7 @@ public class PanelReporteVentas extends PanelGenerico {
         gridOpciones.setVgap(26);
         
         JFXButton opcion1=new JFXButton("Ventas del día");
+        opcion1.getStyleClass().add("jfx-button-opciones");
         opcion1.setOnAction((r)->{
             LocalDate ahora=LocalDate.now();
             LocalDateTime inicioDia=ahora.atStartOfDay();
@@ -70,6 +75,7 @@ public class PanelReporteVentas extends PanelGenerico {
             stage.getScene().setRoot(sub.getRoot());});
         
         JFXButton opcion2=new JFXButton("Ventas del mes");
+        opcion2.getStyleClass().add("jfx-button-opciones");
         opcion2.setOnAction((r)->{
             LocalDate ahora=LocalDate.now();
             LocalDateTime inicioMes=ahora.atStartOfDay().minusDays(ahora.getDayOfMonth()-1);
@@ -79,6 +85,7 @@ public class PanelReporteVentas extends PanelGenerico {
             stage.getScene().setRoot(sub.getRoot());});
         
         JFXButton opcion3=new JFXButton("Ventas del año");
+        opcion3.getStyleClass().add("jfx-button-opciones");
         opcion3.setOnAction((r)->{
             LocalDate ahora=LocalDate.now();
             LocalDateTime inicioAño=ahora.atStartOfDay().minusDays(ahora.getDayOfYear()-1);
@@ -88,14 +95,18 @@ public class PanelReporteVentas extends PanelGenerico {
             stage.getScene().setRoot(sub.getRoot());});
         
         JFXButton opcion4=new JFXButton("Ventas por fecha");
+        opcion4.getStyleClass().add("jfx-button-opciones");
         opcion4.setOnAction((r)->{
             
             GridPane g=new GridPane();
             
             JFXDatePicker dPickerDesde=new JFXDatePicker();
-            dPickerDesde.setPromptText("Desde");
+            dPickerDesde.setDefaultColor(Color.web("ff0a00"));
+            dPickerDesde.setPromptText("");
             JFXDatePicker dPickerHasta=new JFXDatePicker();
-            dPickerHasta.setPromptText("Hasta");
+            dPickerHasta.getStyleClass().add("jfx-date-picker-popup");
+            dPickerHasta.setDefaultColor(Color.web("ff0a00"));
+            dPickerHasta.setPromptText("");
             JFXButton bConsulta=new JFXButton("Consultar");
             gridOpciones.add(bConsulta,5,4);
             g.addColumn(0,new Label("Desde"),dPickerDesde);
@@ -122,6 +133,8 @@ public class PanelReporteVentas extends PanelGenerico {
         ((BorderPane)super.getBorder()).setCenter(cGridOpciones);
     }
     
-    
+    public String getRutaCssFile(){
+        return PanelReporteVentas.class.getResource("/recursos/reporte.css").toExternalForm();
+    }
     
 }

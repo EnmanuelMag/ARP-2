@@ -46,6 +46,8 @@ public class PanelFacturaRegistro {
     
     public PanelFacturaRegistro(Stage p){
         this.pStage = p;
+        p.getScene().getStylesheets().clear();
+        p.getScene().getStylesheets().add(getRutaCssFile());
         this.rootBorder = new BorderPane();
         this.rootBorder.setPadding(ESPACIADO);
         this.rootBorder.setCenter(crearFormulario());
@@ -232,6 +234,6 @@ public class PanelFacturaRegistro {
     }
     
     public String getRutaCssFile(){
-        return Class.class.getResource("/recursos/estiloFrancis.css").toExternalForm();
+        return Class.class.getResource("/recursos/facura.css").toExternalForm();
     }
 }

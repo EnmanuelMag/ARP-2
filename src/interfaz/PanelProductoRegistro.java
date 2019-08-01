@@ -33,16 +33,20 @@ import javafx.stage.Stage;
 public class PanelProductoRegistro  extends PanelGenerico{
     
     
-   
+   //estilo-PanelProducto.css
     
     private HBox contMain;
     
     public PanelProductoRegistro(Stage s,StackPane lastRoot){
         super(s,lastRoot);
         super.border.setCenter(crearFormulario());
-        
+        s.getScene().getStylesheets().clear();
+        s.getScene().getStylesheets().add(getRutaCssProducto());
     }
     
+    public String getRutaCssProducto(){
+        return PanelInicio.class.getResource("/recursos/estilo-PanelProducto.css").toExternalForm();
+    }
     
     public HBox crearFormulario(){
        

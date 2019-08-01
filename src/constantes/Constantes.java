@@ -6,6 +6,7 @@
 package constantes;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -30,4 +31,8 @@ public class Constantes {
     public static final String DataBaseURL="jdbc:mysql://localhost/alertas?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     public static final String DataBaseUser="root";
     public static final String DataBasePass="root";
+    public static final ArrayList<String> ICONOS = new ArrayList<>(Arrays.asList(
+            "factura2B.png","clientes.png","inventario.png","pedidos.png", "producto.png",
+            "proveedor.png", "reporte.png", "ordenes.png"));
+    public static final String PATH_ICON="/recursos/iconos/";
 }

@@ -8,12 +8,27 @@ package interfaz;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import static constantes.Constantes.ESPACIADO;
+import static constantes.Constantes.ICONOS;
+import static constantes.Constantes.PATH_ICON;
 import constantes.Metodos;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -36,13 +51,19 @@ public class PanelInicio {
         rootBorder.setPadding(ESPACIADO);
         rootBorder.setCenter(crearBotones());
         this.root = new StackPane(rootBorder); 
+        rootBorder.setFocusTraversable(true);
     }
     
     
     public HBox crearBotones(){
         
-        JFXButton facturas = new JFXButton("Facturar");
-        facturas.getStyleClass().add("jfx-button-inicio");
+        HashMap<String,Image> iconos = cargarIconos();
+        
+        JFXButton facturas = new JFXButton("");
+        //facturas.setBackground(new Background(new BackgroundImage(iconos.get("factura2B.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+          //BackgroundSize.DEFAULT)));
+        //facturas.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        facturas.getStyleClass().add("jfx-button-factura");
         facturas.setOnAction(e -> {
            
             JFXButton registrar = new JFXButton("Registrar");
@@ -58,11 +79,11 @@ public class PanelInicio {
             
         });
         
-        JFXButton producto = new JFXButton("Producto");
-        producto.getStyleClass().add("jfx-button-inicio");
+        JFXButton producto = new JFXButton("");
+        producto.getStyleClass().add("jfx-button-producto");
         producto.setOnAction(e -> {
             
-            JFXButton consultar = new JFXButton("Consultar");
+            JFXButton consultar = new JFXButton(" Consultar");
             consultar.getStyleClass().add("jfx-button-subIncio");
             
             JFXButton registrar = new JFXButton("Registrar");
@@ -79,8 +100,8 @@ public class PanelInicio {
             
         });
           
-        JFXButton clientes = new JFXButton("Clientes");
-        clientes.getStyleClass().add("jfx-button-inicio");
+        JFXButton clientes = new JFXButton("");
+        clientes.getStyleClass().add("jfx-button-clientes");
         clientes.setOnAction(e -> {
            
             JFXButton registrar = new JFXButton("Registrar");
@@ -97,8 +118,8 @@ public class PanelInicio {
             
         });
         
-        JFXButton proveedores = new JFXButton("Proveedores");
-        proveedores.getStyleClass().add("jfx-button-inicio");
+        JFXButton proveedores = new JFXButton("");
+        proveedores.getStyleClass().add("jfx-button-proveedor");
         proveedores.setOnAction(e -> {
 
             JFXButton registrar = new JFXButton("Registrar");
@@ -116,26 +137,24 @@ public class PanelInicio {
         });
         
         VBox contIzq = new VBox(facturas, producto, clientes, proveedores);
-        contIzq.setSpacing(60);
+        contIzq.setSpacing(40);
         contIzq.setAlignment(Pos.CENTER);
         
-        JFXButton inventario = new JFXButton("Inventario");
-        inventario.getStyleClass().add("jfx-button-inicio");
-        //ingreso.setOnAction(new ManejadorIngreso());
+        JFXButton inventario = new JFXButton("");
+        inventario.getStyleClass().add("jfx-button-inventario");
         
-        JFXButton pedidos = new JFXButton("Pedidos");
-        pedidos.getStyleClass().add("jfx-button-inicio");
+        JFXButton pedidos = new JFXButton("");
+        pedidos.getStyleClass().add("jfx-button-pedidos");
         
-        JFXButton reporte = new JFXButton("Reportes");
-        reporte.getStyleClass().add("jfx-button-inicio");
+        JFXButton reporte = new JFXButton("");
+        reporte.getStyleClass().add("jfx-button-reporte");
         reporte.setOnAction(new ManejadorReportes());
         
-        JFXButton ordenes = new JFXButton("Ordenes");
-        ordenes.getStyleClass().add("jfx-button-inicio");
-        //ordenes.setOnAction(new ManejadorReportes());
+        JFXButton ordenes = new JFXButton("");
+        ordenes.getStyleClass().add("jfx-button-ordenes");
         
         VBox contDer = new VBox(inventario, pedidos, reporte, ordenes);
-        contDer.setSpacing(60);
+        contDer.setSpacing(40);
         contDer.setAlignment(Pos.CENTER);
         
         HBox cont = Metodos.crearPanel(contIzq, contDer);
@@ -143,6 +162,24 @@ public class PanelInicio {
         cont.setSpacing(150);
         cont.setPadding(ESPACIADO);
         return cont;
+    }
+    
+    public HashMap<String,Image> cargarIconos(){
+        
+        HashMap<String,Image> iconos = new HashMap<>();
+        
+        ICONOS.forEach((icono) -> {
+            
+            Image image = new Image(PanelInicio.class.getClass().getResourceAsStream(PATH_ICON+icono), 60, 60, true, true);
+            System.out.println(PATH_ICON+icono);
+            ImageView img = new ImageView();
+            img.setImage(image);
+            HBox cont = new HBox(img);
+            cont.setPadding(new Insets(0,30,0,0));
+            cont.setAlignment(Pos.CENTER_LEFT);
+            iconos.put(icono,image);
+        });
+        return iconos;
     }
     
     public class ManejadorRegistroProveedores implements EventHandler{
