@@ -7,6 +7,7 @@ package interfaz;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
 import static constantes.Constantes.BOTON;
@@ -20,6 +21,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -32,16 +36,30 @@ import javafx.stage.Stage;
  */
 public class PanelProductoRegistro  extends PanelGenerico{
     
+    private JFXDialog diag;
+    private boolean b;
     
    //estilo-PanelProducto.css
     
     private HBox contMain;
     
-    public PanelProductoRegistro(Stage s,StackPane lastRoot){
+    public PanelProductoRegistro(Stage s,StackPane lastRoot, boolean b){
         super(s,lastRoot);
+        this.b = b;
         super.border.setCenter(crearFormulario());
+        setTop();
         s.getScene().getStylesheets().clear();
         s.getScene().getStylesheets().add(getRutaCssProducto());
+    }
+    
+    public void setTop(){
+        Label titulo=new Label("Registro producto");
+        titulo.getStyleClass().clear();
+        titulo.getStyleClass().add("label-titulos-paneles");
+        HBox cTitulo=new HBox(titulo);
+        cTitulo.setAlignment(Pos.CENTER);
+        ((BorderPane)super.getBorder()).setTop(cTitulo);
+        
     }
     
     public String getRutaCssProducto(){
@@ -51,9 +69,25 @@ public class PanelProductoRegistro  extends PanelGenerico{
     public HBox crearFormulario(){
        
         
-        JFXTextField nombre = new JFXTextField();
-        nombre.setPromptText("Nombre");
-        nombre.setLabelFloat(true);
+        HBox contNombre = new HBox();
+        contNombre.setMaxWidth(160);
+        contNombre.setAlignment(Pos.CENTER);
+        
+            JFXTextField nombre = new JFXTextField();
+            nombre.setPromptText("Nombre");
+            nombre.setLabelFloat(true);
+            contNombre.getChildren().add(nombre);
+        
+        if(!b){
+            ImageView img = new ImageView(new Image("/recursos/iconos/lupa2.png"));
+                img.setFitHeight(45);
+                img.setFitWidth(45);
+                HBox contImagen = new HBox(img);
+                contImagen.setAlignment(Pos.CENTER);
+                contImagen.setOnMouseClicked(new ManejadorBuscarProducto(true));
+            contNombre.getChildren().add(contImagen);
+            System.out.println(b);
+        }
         
         
         JFXToggleButton estado = new JFXToggleButton();
@@ -84,7 +118,7 @@ public class PanelProductoRegistro  extends PanelGenerico{
         decripcion.setMaxWidth(270);
         decripcion.setLabelFloat(true);
 
-        VBox cont1 = new VBox(nombre, utilidad, costo, decripcion);
+        VBox cont1 = new VBox(contNombre, utilidad, costo, decripcion);
         cont1.setSpacing(65);
        
         cont1.setAlignment(Pos.TOP_LEFT);
@@ -111,6 +145,34 @@ public class PanelProductoRegistro  extends PanelGenerico{
    
         return contMain;
     }
+    
+    public class ManejadorBuscarProducto implements EventHandler{
+
+        boolean b;
+        
+        public ManejadorBuscarProducto(boolean b){
+            this.b = b;
+        }
+        
+        @Override
+        public void handle(Event event) {
+            
+            int r = (int) (Math.random() * 1); 
+            System.out.println(r);
+            if(r==0){
+                JFXButton btnRegistrar = new JFXButton("Registrar Nueva");
+                btnRegistrar.setOnAction((e) -> {
+                    if(diag != null)diag.close();
+                    PanelProductoRegistro pR = new PanelProductoRegistro(stage,root, b);
+                    stage.getScene().setRoot(pR.getRoot());
+                });
+                diag = Metodos.dialogoMaterial(root, "No existe una materia prima con ese nombre", btnRegistrar);
+            }
+            else{
+                Metodos.dialogoMaterial(root, "Busqueda", "Se encontro la materia prima con ese nombre", "Cerrar");
+            }
+        }
+        }
     
     public Scene getScene(){
         

@@ -113,6 +113,9 @@ public class Cliente {
         return "Cliente{" + "nombre=" + nombre + ", apellios=" + apellidos + '}';
     }
     
+    public String getNombreCompleto(){
+        return this.nombre+" "+this.apellidos;
+    }
     
     
     

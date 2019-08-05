@@ -32,6 +32,7 @@ public class PanelGenerico {
         this.stage = s;
         this.lastRoot=lastRoot;
         this.volver = new JFXButton("Volver");
+        this.volver.getStyleClass().add("jfx-button-basic");
         volver.setPadding(BOTON);
         volver.setAlignment(Pos.TOP_RIGHT);
         volver.setOnAction((y)->{
@@ -39,6 +40,7 @@ public class PanelGenerico {
         });
     
         this.mPrin = new JFXButton("Menú Principal");
+        this.mPrin.getStyleClass().add("jfx-button-basic");
         this.mPrin.setOnAction(new ManejadorPrincipal());
         this.mPrin.setAlignment(Pos.TOP_LEFT);
         mPrin.setPadding(BOTON);

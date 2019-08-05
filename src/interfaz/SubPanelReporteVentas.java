@@ -50,6 +50,8 @@ public class SubPanelReporteVentas extends PanelGenerico {
     
     public void setSubtitulo(String subtitulo){
         this.subtitulo=new Label("Reporte Ventas por: "+subtitulo);
+        this.subtitulo.getStyleClass().clear();
+        this.subtitulo.getStyleClass().add("label-titulos-paneles");
         HBox cTitulo=new HBox(this.subtitulo);
         cTitulo.setAlignment(Pos.CENTER);
         ((BorderPane)super.getBorder()).setTop(cTitulo);

@@ -7,6 +7,7 @@ package interfaz;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
 import static constantes.Constantes.ESPACIADO;
@@ -19,6 +20,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -31,24 +34,38 @@ import javafx.stage.Stage;
  */
 public class PanelClienteRegistro extends PanelGenerico{
     
-    public PanelClienteRegistro(Stage s,StackPane lastRoot){
+    JFXDialog diag;
+    boolean b;
+    
+    public PanelClienteRegistro(Stage s,StackPane lastRoot,  boolean b){
         super(s,lastRoot);
+        this.b = b;
         super.border.setCenter(crearFormulario());
+        setTop();
     }
     
+    public void setTop(){
+        Label titulo=new Label("Registro cliente");
+        titulo.getStyleClass().clear();
+        titulo.getStyleClass().add("label-titulos-paneles");
+        HBox cTitulo=new HBox(titulo);
+        cTitulo.setAlignment(Pos.CENTER);
+        ((BorderPane)super.getBorder()).setTop(cTitulo);
+        
+    }
     
     public HBox crearFormulario(){
        
         
         JFXTextField nombre = new JFXTextField();
         nombre.setPromptText("Nombre");
-        nombre.getStyleClass().add("jfx-texto-largo");
+        
         nombre.setMinWidth(TEXTS);
         nombre.setPrefWidth(TEXTS);
         nombre.setLabelFloat(true);
         
         JFXTextField apellido = new JFXTextField();
-        apellido.getStyleClass().add("jfx-texto-largo");
+        
         apellido.setPromptText("Apellido");
         apellido.setLabelFloat(true);
         apellido.setMinWidth(TEXTS);
@@ -56,6 +73,17 @@ public class PanelClienteRegistro extends PanelGenerico{
         JFXTextField cedula = new JFXTextField();
         cedula.setPromptText("Cédula");
         cedula.setLabelFloat(true);
+                
+        HBox contCedula = new HBox(cedula);
+        if(!b){
+            
+            ImageView img= new ImageView(new Image("/recursos/iconos/lupa2.png"));
+            img.setFitHeight(45);
+            img.setFitWidth(45);
+            HBox contImagen = new HBox(img);
+            
+            contCedula.getChildren().add(contImagen);
+        }
         
         JFXTextField descuento = new JFXTextField();
         descuento.setPromptText("Descuento");
@@ -63,7 +91,7 @@ public class PanelClienteRegistro extends PanelGenerico{
         
         JFXTextField direccion = new JFXTextField();
         direccion.setPromptText("Dirección");
-        direccion.getStyleClass().add("jfx-texto-largo");
+        
         direccion.setMinWidth(TEXTS);
         direccion.setPrefWidth(TEXTS);
         direccion.setLabelFloat(true);
@@ -73,7 +101,7 @@ public class PanelClienteRegistro extends PanelGenerico{
         telefono.setMaxWidth(160);
         telefono.setLabelFloat(true);
         
-        VBox cont1 = new VBox(nombre, apellido, cedula, descuento);
+        VBox cont1 = new VBox(nombre, apellido, contCedula, descuento);
         cont1.setSpacing(65);
        
         cont1.setAlignment(Pos.TOP_LEFT);

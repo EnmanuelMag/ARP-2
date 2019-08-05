@@ -7,6 +7,7 @@ package interfaz;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
 import static constantes.Constantes.ESPACIADO;
 import static constantes.Constantes.TEXTS;
@@ -17,6 +18,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -29,11 +32,24 @@ import javafx.stage.Stage;
  */
 public class PanelProveedorRegistro extends PanelGenerico{
     
-    public PanelProveedorRegistro(Stage s,StackPane lastRoot){
-        super(s,lastRoot);
-        super.border.setCenter(crearFormulario());
-    }
+    private JFXDialog diag;
+    private boolean b;
     
+    public PanelProveedorRegistro(Stage s,StackPane lastRoot, boolean b){
+        super(s,lastRoot);
+        this.b = b;
+        super.border.setCenter(crearFormulario());
+        setTop();
+    }
+    public void setTop(){
+        Label titulo=new Label("Registro proveedor");
+        titulo.getStyleClass().clear();
+        titulo.getStyleClass().add("label-titulos-paneles");
+        HBox cTitulo=new HBox(titulo);
+        cTitulo.setAlignment(Pos.CENTER);
+        ((BorderPane)super.getBorder()).setTop(cTitulo);
+        
+    }
     
     public HBox crearFormulario(){
        
@@ -43,18 +59,35 @@ public class PanelProveedorRegistro extends PanelGenerico{
         nombre.setMinWidth(TEXTS);
         nombre.setLabelFloat(true);
         
+        
+        
+        HBox contRUC = new HBox();
+        contRUC.setMaxWidth(160);
+        contRUC.setAlignment(Pos.CENTER);
+        
         JFXTextField ruc = new JFXTextField();
         ruc.setPromptText("RUC");
         ruc.setLabelFloat(true);
+        contRUC.getChildren().add(ruc);
         
-        VBox cont1 = new VBox(nombre, ruc);
+        if(!b){
+            ImageView img = new ImageView(new Image("/recursos/iconos/lupa2.png"));
+                img.setFitHeight(45);
+                img.setFitWidth(45);
+                HBox contImagen = new HBox(img);
+                contImagen.setAlignment(Pos.CENTER);
+                contImagen.setOnMouseClicked(new ManejadorBuscarP(true));
+            contRUC.getChildren().add(contImagen);
+        }
+        
+        VBox cont1 = new VBox(nombre, contRUC);
         cont1.setSpacing(90);
         //cont1.setMaxWidth(400);
         cont1.setAlignment(Pos.TOP_LEFT);
         
         JFXTextField direccion = new JFXTextField();
         direccion.setPromptText("Dirección");
-        direccion.getStyleClass().add("jfx-texto-largo");
+       
         direccion.setMinWidth(TEXTS);
         direccion.setPrefWidth(TEXTS);
         direccion.setLabelFloat(true);
@@ -85,6 +118,34 @@ public class PanelProveedorRegistro extends PanelGenerico{
         //contRoot.setMaxWidth(500);
         return contRoot;
     }
+    
+    public class ManejadorBuscarP implements EventHandler{
+
+        boolean b;
+        
+        public ManejadorBuscarP(boolean b){
+            this.b = b;
+        }
+        
+        @Override
+        public void handle(Event event) {
+            
+            int r = (int) (Math.random() * 1); 
+            System.out.println(r);
+            if(r==0){
+                JFXButton btnRegistrar = new JFXButton("Registrar Nuevo");
+                btnRegistrar.setOnAction((e) -> {
+                    if(diag != null)diag.close();
+                    PanelProveedorRegistro pR = new PanelProveedorRegistro(stage,root, b);
+                    stage.getScene().setRoot(pR.getRoot());
+                });
+                diag = Metodos.dialogoMaterial(root, "No existe un proveedor con ese nombre", btnRegistrar);
+            }
+            else{
+                Metodos.dialogoMaterial(root, "Busqueda", "Se encontro al proveedor con ese nombre", "Cerrar");
+            }
+        }
+        }
     
     
     public Scene getScene(){

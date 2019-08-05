@@ -4,16 +4,38 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : 22/06/2019, 08:04:36 PM
-    Author     : emman
+    Created on : 2/08/2019, 07:18:26 PM
+    Author     : Josue
 */
-
 .root{
    -fx-background-color: #e6cd8a;
 }
 
+.tarjetaPedido{
+    -fx-background-color: #d7e4ef;
+    
+}
+.tarjetaPedido .label{
+    -fx-min-width: 130;
+    -fx-text-fill: black;
+    -fx-font-size: 17;   
+    -jfx-focus-color: #005683;/*#3c4988;*/
+    -fx-prompt-text-fill: #b4b4b4;
+    -fx-prompt-text-weight: bold;
+    
+}
+.tarjetaPedido .jfx-button{
+    -jfx-button-type: RAISED;
+     -fx-background-color: #ffffff;
+     -fx-border-color: #4087c3; 
+     -fx-text-fill: #000000;
+     -fx-font-size: 16;
+     -fx-border-radius: 8pt;
+     -fx-background-radius: 8pt;
+     -fx-padding: 8;
+}
 
-.scroll-pane {
+scroll-pane {
     -fx-base: #ffffff;
     -fx-background-color: #ffffff;  
 }
@@ -65,12 +87,12 @@ and open the template in the editor.
 
 .jfx-button {
      -jfx-button-type: RAISED;
-     -fx-background-color: #c9edf0;
-     -fx-border-color: #005683; 
+     -fx-background-color: #ffffff;
+     -fx-border-color: #4087c3; 
      -fx-text-fill: #000000;
      -fx-font-size: 16;
-     -fx-border-radius: 25pt;
-     -fx-background-radius: 25pt;
+     -fx-border-radius: 8pt;
+     -fx-background-radius: 8pt;
      -fx-padding: 8;
      
 }
@@ -335,7 +357,7 @@ and open the template in the editor.
     
     -fx-text-fill: #000000;
     -fx-font-size: 17;   
-    -jfx-focus-color: #005683;/*#3c4988;*/
+    -jfx-focus-color: #974532;/*#3c4988;*/
     -fx-prompt-text-fill: #000000;
     -fx-prompt-text-weight: bold;
     
@@ -350,16 +372,22 @@ and open the template in the editor.
 }
 
 .jfx-toggle-button{
-    -fx-text-fill: #2f2f2f;
+    -jfx-toggle-color: #9f5544;
+    -jfx-toggle-line-color:#eabaae;
+    -fx-text-fill: #000000;
     -fx-font-size: 17;   
+}
+
+.jfx-combo-box{
+    -jfx-focus-color: #974532;
+    
 }
 
 .jfx-combo-box .cell{
     -fx-background-color:#dbdbdb; 
     -fx-text-fill: #000000;
     -fx-font-size: 20; 
-    -jfx-focus-color: #005683;
-    
+    -jfx-focus-color: #974532;
 }
 
 .jfx-combo-box .list-view {
@@ -404,7 +432,8 @@ and open the template in the editor.
 
 
 .scroll-paneT {
-    -fx-base: #ffffff;
+    /*-fx-base: #ffffff;*/
+    -fx-border-color: transparent;
     -fx-background-color: #ffffff;  
 }
 
@@ -418,7 +447,7 @@ and open the template in the editor.
 
 .scroll-barT .thumb {
     -fx-background-radius: 5;
-    -fx-background-color: #07a5b6; /*#565656;*/
+    -fx-background-color: #4087c3; /*#565656;*/
     -fx-border-width: 8;
     -fx-background-insets: 2,0,0;
 }

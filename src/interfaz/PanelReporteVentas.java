@@ -50,6 +50,8 @@ public class PanelReporteVentas extends PanelGenerico {
     
     public void setTop(){
         Label titulo=new Label("Reporte Ventas");
+        titulo.getStyleClass().clear();
+        titulo.getStyleClass().add("label-titulos-paneles");
         HBox cTitulo=new HBox(titulo);
         cTitulo.setAlignment(Pos.CENTER);
         ((BorderPane)super.getBorder()).setTop(cTitulo);

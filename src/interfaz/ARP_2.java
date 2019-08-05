@@ -7,6 +7,7 @@ package interfaz;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 /**
  *
@@ -19,7 +20,8 @@ public class ARP_2 extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage=primaryStage;
         PanelInicio pI = new PanelInicio(primaryStage);
-        primaryStage.setTitle("Administrador FRANCIS PAN");
+        primaryStage.setTitle("Administrador FIGOCOBOS CRUZ");
+        this.primaryStage.getIcons().add(new Image(ARP_2.class.getResourceAsStream("/recursos/iconos/icon.png")));
         primaryStage.setScene(new Scene(pI.getRoot(),1280,720));
         primaryStage.getScene().getStylesheets().add(getRutaCssFile());
         primaryStage.show();

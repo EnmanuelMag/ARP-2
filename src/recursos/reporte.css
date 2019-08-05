@@ -7,11 +7,9 @@ and open the template in the editor.
     Created on : 22/06/2019, 08:04:36 PM
     Author     : emman
 */
-
 .root{
-    -fx-background-color:#ffffff; 
+   -fx-background-color: #e6cd8a;
 }
-
 
 .scroll-pane {
     -fx-base: #ffffff;
@@ -49,6 +47,18 @@ and open the template in the editor.
 
 .labelPer{
    -fx-font-size: 28; 
+}
+
+.jfx-button-basic{
+     -jfx-button-type: RAISED;
+     -fx-background-color: #ffffff;
+     -fx-text-fill: #000000;
+     -fx-font-size: 16;
+     -fx-border-width: 1pt;
+     -fx-border-radius: 8pt;
+     -fx-background-radius: 8pt;
+     -fx-padding: 8;
+     
 }
 
 
@@ -389,12 +399,10 @@ and open the template in the editor.
     -fx-text-fill: #000000;
 }
 
-.label-titulos-turnos{
+.label-titulos-paneles{
     -fx-font-size: 28;
-    -fx-background-color: #68b7e5;
+    -fx-font-fill: black;
     -fx-font-weight: bold;
-    -fx-pref-width: 150;
-    -fx-pref-height: 60;
     -fx-alignment: center;
 }
 
