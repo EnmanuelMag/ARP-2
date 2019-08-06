@@ -8,7 +8,21 @@ and open the template in the editor.
     Author     : Josue
 */
 .root{
-   -fx-background-color: #ffffff;
+   -fx-background-color: #fffbf9;
+}
+
+.contInfo{
+    -fx-border-width: 2;
+    -fx-border-color: #292b2d;
+    -fx-max-height: 300px;
+}
+
+.contBack{
+    -fx-background-color: #ffebe2;
+    -fx-border-width: 2;
+    -fx-border-color: #292b2d;
+    -fx-border-radius: 8pt;
+     -fx-background-radius: 8pt;
 }
 
 .tarjetaPedido{
@@ -87,7 +101,7 @@ scroll-pane {
 
 .jfx-button {
      -jfx-button-type: RAISED;
-     -fx-background-color: #eeecf6;
+     -fx-background-color: #faf9ff;
      -fx-border-color: #4732a0; 
      -fx-text-fill: #000000;
      -fx-font-size: 16;
@@ -96,6 +110,10 @@ scroll-pane {
      -fx-background-radius: 8pt;
      -fx-padding: 8;
      
+}
+
+.jfx-combo-box{
+    -jfx-focus-color: #4732a0;
 }
 
 .jfx-button-subIncio {
@@ -380,7 +398,7 @@ scroll-pane {
 }
 
 .jfx-combo-box{
-    -jfx-focus-color: #974532;
+    -jfx-focus-color: #4732a0;
     
 }
 

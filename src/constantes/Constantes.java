@@ -19,6 +19,7 @@ public class Constantes {
     
     
     public static final Insets ESPACIADO = new Insets(20,20,20,20);
+    public static final Insets ESPACIADOBorder = new Insets(40,40,40,40);
     public static final int TEXTS = 260;
     public static final Insets BOTON = new Insets(15,15,15,15);
     public static final ObservableList<String> TIPO_CLIENTES = 

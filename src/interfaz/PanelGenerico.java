@@ -8,6 +8,7 @@ package interfaz;
 import com.jfoenix.controls.JFXButton;
 import static constantes.Constantes.BOTON;
 import static constantes.Constantes.ESPACIADO;
+import static constantes.Constantes.ESPACIADOBorder;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -47,7 +48,7 @@ public class PanelGenerico {
         
         this.border = new BorderPane();
         
-        border.setPadding(ESPACIADO);
+        border.setPadding(ESPACIADOBorder);
         border.setLeft(volver);
         border.setRight(mPrin);
         this.root = new StackPane(border);

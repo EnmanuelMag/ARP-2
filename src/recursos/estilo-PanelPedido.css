@@ -9,21 +9,35 @@ and open the template in the editor.
 */
 
 .root{
-   -fx-background-color: #ffffff;
+   -fx-background-color: #fffbf9;
+}
+
+.contInfo{
+    -fx-border-width: 2;
+    -fx-border-color: #292b2d;
+    -fx-max-height: 300px;
+}
+
+.contBack{
+    -fx-background-color: #ffebe2;
+    -fx-border-width: 2;
+    -fx-border-color: #292b2d;
+    -fx-border-radius: 8pt;
+     -fx-background-radius: 8pt;
 }
 
 
 .scroll-pane {
     -fx-base: transparent;
-    -fx-background-color: #d9d9d9;  
+    -fx-background-color: #fff1f1;  
 }
 
 .scroll-pane .corner{
-     -fx-background-color: #d9d9d9;
+     -fx-background-color: #fff1f1;
 }
 
 .scroll-bar .track {
-    -fx-background-color: #d9d9d9;
+    -fx-background-color: #fff1f1;
 }
 
 .scroll-bar .thumb {
@@ -35,7 +49,7 @@ and open the template in the editor.
 
 .scroll-bar > .increment-button > .increment-arrow,
 .scroll-bar > .decrement-button > .decrement-arrow {
-    -fx-background-color: #d9d9d9;
+    -fx-background-color: #fff1f1;
 }
 
 .scroll-bar increment-arrow,
@@ -355,6 +369,11 @@ and open the template in the editor.
     -fx-font-size: 17;   
 }
 
+.jfx-combo-box{
+    -jfx-focus-color: #005683;
+    
+}
+
 .jfx-combo-box .cell{
     -fx-background-color:#dbdbdb; 
     -fx-text-fill: #000000;
@@ -376,6 +395,8 @@ and open the template in the editor.
     -fx-border-color: #292b2d;
     -fx-max-height: 300px;
     -fx-min-width: 700;
+    -fx-border-radius: 8pt;
+     -fx-background-radius: 8pt;
 }
 
 

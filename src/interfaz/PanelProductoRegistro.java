@@ -70,11 +70,12 @@ public class PanelProductoRegistro  extends PanelGenerico{
        
         
         HBox contNombre = new HBox();
-        contNombre.setMaxWidth(160);
-        contNombre.setAlignment(Pos.CENTER);
+        
+        contNombre.setAlignment(Pos.CENTER_LEFT);
         
             JFXTextField nombre = new JFXTextField();
             nombre.setPromptText("Nombre");
+            nombre.getStyleClass().add("jfx-texto-largo");
             nombre.setLabelFloat(true);
             contNombre.getChildren().add(nombre);
         
@@ -115,7 +116,8 @@ public class PanelProductoRegistro  extends PanelGenerico{
         
         JFXTextField decripcion = new JFXTextField();
         decripcion.setPromptText("Decripcion");
-        decripcion.setMaxWidth(270);
+        decripcion.getStyleClass().add("jfx-texto-largo2");
+        
         decripcion.setLabelFloat(true);
 
         VBox cont1 = new VBox(contNombre, utilidad, costo, decripcion);

@@ -46,6 +46,7 @@ public class SubPanelReporteVentas extends PanelGenerico {
         this.desde=desde;
         this.hasta=hasta;
         setCenterDefecto();
+        
     }
     
     public void setSubtitulo(String subtitulo){

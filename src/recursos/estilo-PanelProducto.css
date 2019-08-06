@@ -9,7 +9,21 @@ and open the template in the editor.
 */
 
 .root{
-   -fx-background-color: #ffffff;
+   -fx-background-color: #fffbf9;
+}
+
+.contInfo{
+    -fx-border-width: 2;
+    -fx-border-color: #292b2d;
+    -fx-max-height: 300px;
+}
+
+.contBack{
+    -fx-background-color: #ffebe2;
+    -fx-border-width: 2;
+    -fx-border-color: #292b2d;
+    -fx-border-radius: 8pt;
+     -fx-background-radius: 8pt;
 }
 
 
@@ -342,11 +356,22 @@ and open the template in the editor.
     
 }
 .jfx-texto-largo{
-    -fx-min-width: 130;
-    -fx-text-fill: #2f2f2f;
+    -fx-min-width: 250;
+    -fx-text-fill: #000000;
     -fx-font-size: 17;   
-    -jfx-focus-color: #005683;/*#3c4988;*/
-    -fx-prompt-text-fill: #b4b4b4;
+    -jfx-focus-color: #a64d39;/*#3c4988;*/
+    -fx-prompt-text-fill: #000000;
+    -fx-prompt-text-weight: bold;
+    -fx-prompt-text-weight: bold;
+}
+
+.jfx-texto-largo2{
+    -fx-min-width: 320;
+    -fx-text-fill: #000000;
+    -fx-font-size: 17;   
+    -jfx-focus-color: #a64d39;/*#3c4988;*/
+    -fx-prompt-text-fill: #000000;
+    -fx-prompt-text-weight: bold;
     -fx-prompt-text-weight: bold;
 }
 
@@ -358,7 +383,7 @@ and open the template in the editor.
 }
 
 .jfx-combo-box{
-    -jfx-focus-color: #974532;
+    -jfx-focus-color: #a64d39;
     
 }
 

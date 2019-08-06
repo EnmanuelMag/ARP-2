@@ -55,6 +55,13 @@ public class PanelInicio {
             p.getScene().getStylesheets().add(getRutaCssFile());
         }
         
+        ImageView img = new ImageView(new Image("/recursos/iconos/logo.png", 286, 149, true, true));
+   
+        HBox c = new HBox(img);
+        c.setPadding(new Insets(20,0,0,0));
+        c.setAlignment(Pos.CENTER);
+        rootBorder.setTop(c);
+        
         rootBorder.setPadding(ESPACIADO);
         rootBorder.setCenter(crearBotones());
         this.root = new StackPane(rootBorder); 
@@ -175,7 +182,7 @@ public class PanelInicio {
             HBox cont = new HBox(registrar, consultar);
             cont.setAlignment(Pos.CENTER);
             cont.setSpacing(20);
-            dialogo = Metodos.dialogoMaterial(root, "Selecione una acción a realizar (Proveedores)", cont);
+            dialogo = Metodos.dialogoMaterial(root, "Selecione una acción a realizar (Pedidos)", cont);
             
         });
         pedidos.getStyleClass().add("jfx-button-pedidos");
@@ -192,7 +199,7 @@ public class PanelInicio {
         HBox ventas = new HBox(facturas, pedidos, clientes);
         ventas.setSpacing(25);
         ventas.setAlignment(Pos.CENTER);
-        ventas.getStyleClass().add("contInfo");
+        //ventas.getStyleClass().add("contInfo");
         ventas.setPrefHeight(130);
         ventas.setMaxWidth(1100);
         
@@ -213,7 +220,7 @@ public class PanelInicio {
         
         compra.setAlignment(Pos.CENTER);
         compra.setSpacing(120);
-        compra.getStyleClass().add("contInfo");
+        //compra.getStyleClass().add("contInfo");
         compra.setPrefHeight(250);
         compra.setMaxWidth(1100);
         
@@ -227,7 +234,7 @@ public class PanelInicio {
         HBox info = new HBox(reporte);
         info.setAlignment(Pos.CENTER);
         info.setSpacing(25);
-        info.getStyleClass().add("contInfo");
+        //info.getStyleClass().add("contInfo");
         info.setPrefHeight(130);
         info.setMaxWidth(1100);
         
@@ -239,7 +246,13 @@ public class PanelInicio {
         c3.setAlignment(Pos.CENTER);
         
         VBox contMain = new VBox(c1, c2, c3);
-        contMain.setSpacing(45);
+        c1.getStyleClass().add("contBack");
+        c1.setMaxWidth(1100);
+        c2.getStyleClass().add("contBack");
+        c2.setMaxWidth(1100);
+        c3.getStyleClass().add("contBack");
+        c3.setMaxWidth(1100);
+        contMain.setSpacing(25);
         contMain.setAlignment(Pos.CENTER);
         
         return contMain;
