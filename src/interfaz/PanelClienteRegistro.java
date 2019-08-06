@@ -40,6 +40,8 @@ public class PanelClienteRegistro extends PanelGenerico{
     public PanelClienteRegistro(Stage s,StackPane lastRoot,  boolean b){
         super(s,lastRoot);
         this.b = b;
+        s.getScene().getStylesheets().clear();
+        s.getScene().getStylesheets().add(getRutaCssFile());
         super.border.setCenter(crearFormulario());
         setTop();
     }
@@ -159,6 +161,6 @@ public class PanelClienteRegistro extends PanelGenerico{
     }
     
     public String getRutaCssFile(){
-        return PanelClienteRegistro.class.getResource("/recursos/estiloFrancis.css").toExternalForm();
+        return PanelClienteRegistro.class.getResource("/recursos/estilo-PanelCliente.css").toExternalForm();
     }
 }

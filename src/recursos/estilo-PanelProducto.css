@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 
 .root{
-   -fx-background-color: #e6cd8a;
+   -fx-background-color: #ffffff;
 }
 
 
@@ -65,9 +65,10 @@ and open the template in the editor.
 
 .jfx-button {
      -jfx-button-type: RAISED;
-     -fx-background-color: #ffffff;
-     -fx-border-color: #974532; 
+     -fx-background-color:#fff1ee; /*#e9cec7; /*#d59384;*/
+     -fx-border-color: #a64d39; 
      -fx-text-fill: #000000;
+     -fx-border-width: 1pt;
      -fx-font-size: 16;
      -fx-border-radius: 8pt;
      -fx-background-radius: 8pt;
@@ -335,7 +336,7 @@ and open the template in the editor.
     
     -fx-text-fill: #000000;
     -fx-font-size: 17;   
-    -jfx-focus-color: #974532;/*#3c4988;*/
+    -jfx-focus-color: #a64d39;/*#3c4988;*/
     -fx-prompt-text-fill: #000000;
     -fx-prompt-text-weight: bold;
     

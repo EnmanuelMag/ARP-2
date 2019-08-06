@@ -7,6 +7,7 @@ package interfaz;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
+import static constantes.Constantes.BOTON;
 import static constantes.Constantes.ESPACIADO;
 import static constantes.Constantes.ICONOS;
 import static constantes.Constantes.PATH_ICON;
@@ -21,6 +22,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -48,6 +50,11 @@ public class PanelInicio {
     public PanelInicio(Stage p){
         this.pStage = p;
         this.rootBorder = new BorderPane();
+        if(p.getScene() != null) {
+            p.getScene().getStylesheets().clear();
+            p.getScene().getStylesheets().add(getRutaCssFile());
+        }
+        
         rootBorder.setPadding(ESPACIADO);
         rootBorder.setCenter(crearBotones());
         this.root = new StackPane(rootBorder); 
@@ -55,11 +62,12 @@ public class PanelInicio {
     }
     
     
-    public HBox crearBotones(){
+    public VBox crearBotones(){
         
         HashMap<String,Image> iconos = cargarIconos();
         
         JFXButton facturas = new JFXButton("");
+        facturas.setPadding(BOTON);
         //facturas.setBackground(new Background(new BackgroundImage(iconos.get("factura2B.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
           //BackgroundSize.DEFAULT)));
         //facturas.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
@@ -68,10 +76,11 @@ public class PanelInicio {
            
             JFXButton registrar = new JFXButton("Registrar");
             registrar.getStyleClass().add("jfx-button-subIncio"); 
-            registrar.setOnMouseClicked(new ManejadorRegistroFactura());
+            registrar.setOnMouseClicked(new ManejadorRegistroFactura(true));
             
             JFXButton consultar = new JFXButton("Consultar");
             consultar.getStyleClass().add("jfx-button-subIncio");
+            consultar.setOnMouseClicked(new ManejadorRegistroFactura(false));
             
             HBox cont = new HBox(registrar, consultar);
             cont.setAlignment(Pos.CENTER);
@@ -84,6 +93,7 @@ public class PanelInicio {
         });
         
         JFXButton producto = new JFXButton("");
+        producto.setPadding(BOTON);
         producto.getStyleClass().add("jfx-button-producto");
         producto.setOnAction(e -> {
             
@@ -107,6 +117,7 @@ public class PanelInicio {
         });
           
         JFXButton clientes = new JFXButton("");
+        clientes.setPadding(BOTON);
         clientes.getStyleClass().add("jfx-button-clientes");
         clientes.setOnAction(e -> {
            
@@ -126,6 +137,7 @@ public class PanelInicio {
         });
         
         JFXButton proveedores = new JFXButton("");
+        proveedores.setPadding(BOTON);
         proveedores.getStyleClass().add("jfx-button-proveedor");
         proveedores.setOnAction(e -> {
 
@@ -144,32 +156,93 @@ public class PanelInicio {
             
         });
         
-        VBox contIzq = new VBox(facturas, producto, clientes, proveedores);
-        contIzq.setSpacing(40);
-        contIzq.setAlignment(Pos.CENTER);
-        
         JFXButton inventario = new JFXButton("");
+        inventario.setPadding(BOTON);
         inventario.getStyleClass().add("jfx-button-inventario");
         
         JFXButton pedidos = new JFXButton("");
+        pedidos.setPadding(BOTON);
+        pedidos.setOnAction(e -> {
+
+            JFXButton registrar = new JFXButton("Registrar");
+            registrar.getStyleClass().add("jfx-button-subIncio");
+            registrar.setOnAction(new ManejadorRegistroPedido(true));
+            
+            JFXButton consultar = new JFXButton("Consultar");
+            consultar.getStyleClass().add("jfx-button-subIncio");
+            consultar.setOnAction(new ManejadorRegistroPedido(false));
+            
+            HBox cont = new HBox(registrar, consultar);
+            cont.setAlignment(Pos.CENTER);
+            cont.setSpacing(20);
+            dialogo = Metodos.dialogoMaterial(root, "Selecione una acción a realizar (Proveedores)", cont);
+            
+        });
         pedidos.getStyleClass().add("jfx-button-pedidos");
         
         JFXButton reporte = new JFXButton("");
+        reporte.setPadding(BOTON);
         reporte.getStyleClass().add("jfx-button-reporte");
         reporte.setOnAction(new ManejadorReportes());
         
         JFXButton ordenes = new JFXButton("");
+        ordenes.setPadding(BOTON);
         ordenes.getStyleClass().add("jfx-button-ordenes");
         
-        VBox contDer = new VBox(inventario, pedidos, reporte, ordenes);
-        contDer.setSpacing(40);
-        contDer.setAlignment(Pos.CENTER);
+        HBox ventas = new HBox(facturas, pedidos, clientes);
+        ventas.setSpacing(25);
+        ventas.setAlignment(Pos.CENTER);
+        ventas.getStyleClass().add("contInfo");
+        ventas.setPrefHeight(130);
+        ventas.setMaxWidth(1100);
         
-        HBox cont = Metodos.crearPanel(contIzq, contDer);
-        cont.setAlignment(Pos.CENTER);
-        cont.setSpacing(150);
-        cont.setPadding(ESPACIADO);
-        return cont;
+        Label vt = new Label("Ventas");
+        vt.getStyleClass().add("label-tipo-paneles");
+        
+        VBox c1 = new VBox(vt, ventas);
+        c1.setSpacing(5);
+        c1.setAlignment(Pos.CENTER);
+        
+        VBox compra1 = new VBox(ordenes, proveedores);
+        compra1.setSpacing(25);
+        compra1.setAlignment(Pos.CENTER);
+        VBox compra2 = new VBox(inventario, producto);
+        compra2.setSpacing(25);
+        compra2.setAlignment(Pos.CENTER);
+        HBox compra = new HBox(compra1, compra2);
+        
+        compra.setAlignment(Pos.CENTER);
+        compra.setSpacing(120);
+        compra.getStyleClass().add("contInfo");
+        compra.setPrefHeight(250);
+        compra.setMaxWidth(1100);
+        
+        Label cmp = new Label("Compras");
+        cmp.getStyleClass().add("label-tipo-paneles");
+        
+        VBox c2 = new VBox(cmp, compra);
+        c2.setSpacing(5);
+        c2.setAlignment(Pos.CENTER);
+        
+        HBox info = new HBox(reporte);
+        info.setAlignment(Pos.CENTER);
+        info.setSpacing(25);
+        info.getStyleClass().add("contInfo");
+        info.setPrefHeight(130);
+        info.setMaxWidth(1100);
+        
+        Label inf = new Label("Análisis de Ventas");
+        inf.getStyleClass().add("label-tipo-paneles");
+        
+        VBox c3 = new VBox(inf, info);
+        c3.setSpacing(5);
+        c3.setAlignment(Pos.CENTER);
+        
+        VBox contMain = new VBox(c1, c2, c3);
+        contMain.setSpacing(45);
+        contMain.setAlignment(Pos.CENTER);
+        
+        return contMain;
     }
     
     public HashMap<String,Image> cargarIconos(){
@@ -191,10 +264,34 @@ public class PanelInicio {
     }
     
     public class ManejadorRegistroFactura implements EventHandler{
+        
+        boolean b;
+        
+        public ManejadorRegistroFactura(boolean b){
+            this.b = b;
+        }
+        
         @Override
         public void handle(Event event) {
             dialogo.close();
-            PanelBusquedaPedido pR = new PanelBusquedaPedido(pStage,root);
+            PanelBusquedaPedido pR = new PanelBusquedaPedido(pStage,root, b);
+            pStage.getScene().setRoot(pR.getRoot());
+           
+        }
+    }
+    
+    public class ManejadorRegistroPedido implements EventHandler{
+        
+        boolean b;
+        
+        public ManejadorRegistroPedido(boolean b){
+            this.b = b;
+        }
+        
+        @Override
+        public void handle(Event event) {
+            dialogo.close();
+            PanelPedidoRegistro pR = new PanelPedidoRegistro(pStage,root, b);
             pStage.getScene().setRoot(pR.getRoot());
            
         }
@@ -252,7 +349,7 @@ public class PanelInicio {
         }
     }
     
-   public class ManejadorReportes implements EventHandler{
+    public class ManejadorReportes implements EventHandler{
         @Override
         public void handle(Event event) {
             PanelReporteVentas pR = new PanelReporteVentas(pStage,root);

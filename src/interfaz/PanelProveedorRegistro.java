@@ -38,6 +38,8 @@ public class PanelProveedorRegistro extends PanelGenerico{
     public PanelProveedorRegistro(Stage s,StackPane lastRoot, boolean b){
         super(s,lastRoot);
         this.b = b;
+        s.getScene().getStylesheets().clear();
+        s.getScene().getStylesheets().add(getRutaCssFile());
         super.border.setCenter(crearFormulario());
         setTop();
     }
@@ -160,6 +162,6 @@ public class PanelProveedorRegistro extends PanelGenerico{
     }
     
     public String getRutaCssFile(){
-        return Class.class.getResource("/recursos/estiloFrancis.css").toExternalForm();
+        return Class.class.getResource("/recursos/estilo-PanelProveedores.css").toExternalForm();
     }
 }

@@ -41,10 +41,14 @@ import sistema.Pedido;
 public class PanelBusquedaPedido extends PanelGenerico{
     
         private VBox contMain;
+        private boolean b;
     
-    public PanelBusquedaPedido(Stage s,StackPane lastRoot){
+    public PanelBusquedaPedido(Stage s,StackPane lastRoot, boolean b){
         super(s,lastRoot);
+        this.b = b;
         super.border.setCenter(crearFormulario());
+        s.getScene().getStylesheets().clear();
+        s.getScene().getStylesheets().add(getRutaCssFile());
         setTop();
     }
     
@@ -105,10 +109,19 @@ public class PanelBusquedaPedido extends PanelGenerico{
         
         for(Pedido p :pedidosPorFacturar){
             VBox v=new VBox();
-            JFXButton b=new JFXButton("Facturar");
-            b.setOnMouseClicked((r)->{
+            JFXButton button;
+            if(b){
+               button =new JFXButton("Facturar");
+                button.setOnMouseClicked((r)->{
                 stage.getScene().setRoot(new PanelFacturaRegistro(stage,root,p).getRoot());
-            });
+                });
+            }
+            else{
+                button =new JFXButton("Mostrar Detalle");
+                button.setOnMouseClicked((r)->{
+                stage.getScene().setRoot(new PanelFacturaRegistro(stage,root,p).getRoot());
+                });
+            }
             v.getStyleClass().add("tarjetaPedido");
             v.setAlignment(Pos.CENTER_LEFT);
             v.setPadding(new Insets(20));
@@ -117,7 +130,7 @@ public class PanelBusquedaPedido extends PanelGenerico{
             g.setHgap(20);
             g.addColumn(0, new Label("Cédula"), new Label("Nombres"), new Label("Fecha"));
             g.addColumn(1, new Label(p.getCliente().getCedula()) ,new Label(p.getCliente().getNombreCompleto()), new Label(p.getFecha().toString()));
-            g.add(b,10,2);
+            g.add(button,10,2);
             v.getChildren().add(g);
             pedidosTarjeta.add(v);
         }
@@ -153,6 +166,6 @@ public class PanelBusquedaPedido extends PanelGenerico{
     }
     
     public String getRutaCssFile(){
-        return PanelBusquedaPedido.class.getResource("/recursos/estiloFrancis.css").toExternalForm();
+        return PanelBusquedaPedido.class.getResource("/recursos/estilo-PanelFactura.css").toExternalForm();
     }
 }
