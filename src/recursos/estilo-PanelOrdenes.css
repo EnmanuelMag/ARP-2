@@ -12,17 +12,65 @@ and open the template in the editor.
    -fx-background-color: #fffbf9;
 }
 
+.contCategoria{
+    -fx-border-width: 2;
+    -fx-border-color: #292b2d;
+    -fx-max-height: 300px;
+}
+
+.contCategoriaBackground{
+    -fx-background-color: #ffebe2;
+    -fx-border-width: 2;
+    -fx-border-color: #292b2d;
+    -fx-border-radius: 8pt;
+    -fx-background-radius: 8pt;
+}
+
+.contInfo{
+    -fx-border-width: 2;
+    -fx-border-color: #292b2d;
+    -fx-max-height: 300px;
+    -fx-background-radius: 8pt;
+}
+
+.contInfo2{
+    -fx-border-width: 2;
+    -fx-border-color: #292b2d;
+    -fx-min-width: 1000px;
+    -fx-background-radius: 8pt;
+    -fx-border-radius: 8pt;
+}
+
+.contBack{
+    -fx-background-color: #ffebe2;
+    -fx-border-width: 2;
+    -fx-border-color: #292b2d;
+    -fx-border-radius: 8pt;
+     -fx-background-radius: 8pt;
+     -fx-max-height: 80px;
+     -fx-max-width: 160px ;   
+}
+
+.contBackOnly{
+    -fx-background-color: #ffebe2;
+    -fx-border-width: 2;
+    -fx-border-color: #292b2d;
+    -fx-border-radius: 8pt;
+     -fx-background-radius: 8pt;
+}
+
+
 .scroll-pane {
-    -fx-base: #ffffff;
-    -fx-background-color: #ffffff;  
+    -fx-base: transparent;
+    -fx-background-color: #fff1f1;  
 }
 
 .scroll-pane .corner{
-     -fx-background-color: #ffffff/*#ededed;    */
+     -fx-background-color: #fff1f1;
 }
 
 .scroll-bar .track {
-    -fx-background-color: #ffffff/*#ededed;#3c3f41;   */
+    -fx-background-color: #fff1f1;
 }
 
 .scroll-bar .thumb {
@@ -34,18 +82,20 @@ and open the template in the editor.
 
 .scroll-bar > .increment-button > .increment-arrow,
 .scroll-bar > .decrement-button > .decrement-arrow {
-    -fx-background-color: #ffffff;
+    -fx-background-color: #fff1f1;
 }
 
 .scroll-bar increment-arrow,
 .scroll-bar decrement-arrow{
-    -fx-background-color: #ffffff;
+    -fx-background-color: transparent;
     -fx-padding: -2;
 }
+
 
 .labelPer{
    -fx-font-size: 28; 
 }
+
 .jfx-button-basic{
      -jfx-button-type: RAISED;
      -fx-background-color: #ffffff;
@@ -58,16 +108,30 @@ and open the template in the editor.
      
 }
 
+
 .jfx-button {
      -jfx-button-type: RAISED;
      -fx-background-color: #c9edf0;
      -fx-border-color: #005683; 
      -fx-text-fill: #000000;
+     -fx-border-width: 1pt;
      -fx-font-size: 16;
-     -fx-border-radius: 25pt;
-     -fx-background-radius: 25pt;
+     -fx-border-radius: 10pt;
+     -fx-background-radius: 10pt;
      -fx-padding: 8;
      
+}
+
+.jfx-button-registrar{
+    -jfx-button-type: RAISED;
+     -fx-background-color: #c9edf0;
+     -fx-border-color: #005683; 
+     -fx-text-fill: #000000;
+     -fx-border-width: 1pt;
+     -fx-font-size: 18;
+     -fx-border-radius: 10pt;
+     -fx-background-radius: 10pt;
+     -fx-padding: 8;
 }
 
 .jfx-button-subIncio {
@@ -105,8 +169,7 @@ and open the template in the editor.
      -fx-border-width: 0pt;
      -fx-background-radius: 10pt;
      -fx-pref-width: 320px;
-     -fx-pref-height: 90px; 
-     -fx-padding: 20;
+     -fx-pref-height: 90px;    
 }
 
 .jfx-button-factura:hover{
@@ -126,7 +189,7 @@ and open the template in the editor.
 .jfx-button-clientes{
      -fx-background-image: url("iconos/clientesB.png");
      -jfx-button-type: RAISED;
-     -fx-padding: 20;
+     
      -fx-text-fill: #000000;
      -fx-font-size: 30;
      -fx-border-radius: 10;
@@ -153,7 +216,7 @@ and open the template in the editor.
 .jfx-button-inventario{
      -fx-background-image: url("iconos/inventarioB.png");
      -jfx-button-type: RAISED;
-     -fx-padding: 20;
+     
      -fx-text-fill: #000000;
      -fx-font-size: 30;
      -fx-border-radius: 10;
@@ -180,7 +243,7 @@ and open the template in the editor.
 .jfx-button-ordenes{
      -fx-background-image: url("iconos/ordenesB.png");
      -jfx-button-type: RAISED;
-     -fx-padding: 20;
+     
      -fx-text-fill: #000000;
      -fx-font-size: 30;
      -fx-border-radius: 10;
@@ -207,7 +270,7 @@ and open the template in the editor.
 .jfx-button-pedidos{
      -fx-background-image: url("iconos/pedidosB.png");
      -jfx-button-type: RAISED;
-     -fx-padding: 20;
+     
      -fx-text-fill: #000000;
      -fx-font-size: 30;
      -fx-border-radius: 10;
@@ -234,7 +297,7 @@ and open the template in the editor.
 .jfx-button-producto{
      -fx-background-image: url("iconos/productoB.png");
      -jfx-button-type: RAISED;
-     -fx-padding: 20;
+     
      -fx-text-fill: #000000;
      -fx-font-size: 30;
      -fx-border-radius: 10;
@@ -261,7 +324,7 @@ and open the template in the editor.
 .jfx-button-proveedor{
      -fx-background-image: url("iconos/proveedorB.png");
      -jfx-button-type: RAISED;
-     -fx-padding: 20;
+     
      -fx-text-fill: #000000;
      -fx-font-size: 30;
      -fx-border-radius: 10;
@@ -288,7 +351,7 @@ and open the template in the editor.
 .jfx-button-reporte{
      -fx-background-image: url("iconos/reporteB.png");
      -jfx-button-type: RAISED;
-     -fx-padding: 20;
+     
      -fx-text-fill: #000000;
      -fx-font-size: 30;
      -fx-border-radius: 10;
@@ -336,13 +399,34 @@ and open the template in the editor.
     -fx-prompt-text-weight: bold;
     
 }
+
 .jfx-texto-largo{
-    -fx-min-width: 130;
+    -fx-min-width: 220;
     -fx-text-fill: #2f2f2f;
     -fx-font-size: 17;   
     -jfx-focus-color: #005683;/*#3c4988;*/
-    -fx-prompt-text-fill: #b4b4b4;
+    -fx-prompt-text-fill: #000000;
     -fx-prompt-text-weight: bold;
+}
+
+.texto-cant .jfx-text-field{
+    -fx-max-width: 90;
+    
+    -fx-text-fill: #2f2f2f;
+    -fx-font-size: 17;   
+    -jfx-focus-color: #005683;/*#3c4988;*/
+    -fx-prompt-text-fill: #000000;
+    -fx-prompt-text-weight: bold;
+}
+
+.texto-cant{
+    -fx-background-color: #ffebe2;
+    -fx-border-width: 2;
+    -fx-border-color: #292b2d;
+    -fx-border-radius: 8pt;
+     -fx-background-radius: 8pt;
+     -fx-max-height: 300px;
+     -fx-min-width: 220px ;   
 }
 
 .jfx-toggle-button{
@@ -351,7 +435,8 @@ and open the template in the editor.
 }
 
 .jfx-combo-box{
-    -fx-border-color: #005683; 
+    -jfx-focus-color: #005683;
+    
 }
 
 .jfx-combo-box .cell{
@@ -370,18 +455,13 @@ and open the template in the editor.
     -fx-text-fill: #000000;
 }
 
-.contCategoria{
+.contInfo{
     -fx-border-width: 2;
     -fx-border-color: #292b2d;
     -fx-max-height: 300px;
-}
-
-.contCategoriaBackground{
-    -fx-background-color: #ffebe2;
-    -fx-border-width: 2;
-    -fx-border-color: #292b2d;
+    -fx-min-width: 700;
     -fx-border-radius: 8pt;
-    -fx-background-radius: 8pt;
+     -fx-background-radius: 8pt;
 }
 
 
@@ -400,13 +480,6 @@ and open the template in the editor.
     -fx-alignment: center;
 }
 
-.label-tipo-paneles{
-    -fx-font-size: 23;
-    -fx-font-fill: black;
-    -fx-font-weight: bold;
-    -fx-alignment: center;
-}
-
 .label-titulos-puestos{
     -fx-font-size: 28;
     -fx-background-color: #6487aa;
@@ -418,38 +491,3 @@ and open the template in the editor.
 }
 
 
-.scroll-paneT {
-    -fx-base: #ffffff;
-    -fx-background-color: #ffffff;  
-}
-
-.scroll-paneT .corner{
-     -fx-background-color: #dbdbdb/*#ededed;    */
-}
-
-.scroll-barT .track {
-    -fx-background-color: #dbdbdb/*#ededed;#3c3f41;   */
-}
-
-.scroll-barT .thumb {
-    -fx-background-radius: 5;
-    -fx-background-color: #07a5b6; /*#565656;*/
-    -fx-border-width: 8;
-    -fx-background-insets: 2,0,0;
-}
-
-.scroll-barT  {
-    -fx-background-color: #ffffff;/*#ededed;*/
-    -fx-background-insets: 0,10,0,0;
-}
-
-.scroll-barT .increment-button .increment-arrow,
-.scroll-barT .decrement-button .decrement-arrow {
-    -fx-background-color: #dbdbdb;
-}
-
-.scroll-barT increment-arrow,
-.scroll-barT decrement-arrow{
-    -fx-background-color: #dbdbdb;
-    -fx-padding: -2;
-}

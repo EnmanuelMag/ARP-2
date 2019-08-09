@@ -17,6 +17,20 @@ and open the template in the editor.
     -fx-max-height: 300px;
 }
 
+.contCategoria{
+    -fx-border-width: 2;
+    -fx-border-color: #292b2d;
+    -fx-max-height: 300px;
+}
+
+.contCategoriaBackground{
+    -fx-background-color: #ffebe2;
+    -fx-border-width: 2;
+    -fx-border-color: #292b2d;
+    -fx-border-radius: 8pt;
+    -fx-background-radius: 8pt;
+}
+
 .contBack{
     -fx-background-color: #ffebe2;
     -fx-border-width: 2;

@@ -19,6 +19,7 @@ public class Constantes {
     
     
     public static final Insets ESPACIADO = new Insets(20,20,20,20);
+    public static final Insets ESPACIADO2 = new Insets(50,40,40,40);
     public static final Insets ESPACIADOBorder = new Insets(40,40,40,40);
     public static final int TEXTS = 260;
     public static final Insets BOTON = new Insets(15,15,15,15);
@@ -27,6 +28,7 @@ public class Constantes {
     public static final ObservableList<String> CATG_PRODUCTOS = 
             FXCollections.observableArrayList("HELADO", "CONO", "JALEA", "OTROS");
     public static final Insets BOTONA = new Insets(7,7,7,7);
+    public static final Insets ESPACIADO_FILTROS = new Insets(28,10,13,10);
     public static final ObservableList<String> TABLAS = FXCollections.observableArrayList("Cliente", 
             "Factura", "Producto", "Categoria", "Proveedor", "Materia Prima");
     public static final String DataBaseURL="jdbc:mysql://localhost/alertas?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
@@ -36,4 +38,10 @@ public class Constantes {
             "factura2B.png","clientes.png","inventario.png","pedidos.png", "producto.png",
             "proveedor.png", "reporte.png", "ordenes.png"));
     public static final String PATH_ICON="/recursos/iconos/";
+    public static final ObservableList<String> FILTRO_POR_ORDENES = 
+            FXCollections.observableArrayList("PRODUCTO", "PROVEEDOR", "ESTADO");
+    public static final ObservableList<String> ESTADO = 
+            FXCollections.observableArrayList("RECIBIDO (COMPLETO)", "PARCIALMENTE RECIBIDO", "PENDIENTE");
+    public static final ObservableList<String> FILTRO_POR_PEDIDOS = 
+            FXCollections.observableArrayList("TIPO DE CLIENTE", "CLIENTE");
 }

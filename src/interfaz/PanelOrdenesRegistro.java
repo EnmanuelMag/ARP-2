@@ -37,7 +37,7 @@ import javafx.stage.Stage;
  *
  * @author emman
  */
-public class PanelPedidoRegistro extends PanelGenerico{
+public class PanelOrdenesRegistro extends PanelGenerico{
     
    
     private HBox contMain;
@@ -47,7 +47,7 @@ public class PanelPedidoRegistro extends PanelGenerico{
     private boolean b;
     private JFXDialog diag;
     
-    public PanelPedidoRegistro(Stage p,StackPane lastRoot, boolean b){
+    public PanelOrdenesRegistro(Stage p,StackPane lastRoot, boolean b){
         super(p, lastRoot);
         this.b = b;
  
@@ -60,14 +60,14 @@ public class PanelPedidoRegistro extends PanelGenerico{
     
     public VBox crearFormulario(){
        
-        HBox c1 = new HBox(new Label("REGISTRO PEDIDOS"));
+        HBox c1 = new HBox(new Label("REGISTRO ÓRDENES"));
         c1.getStyleClass().add("label-titulos-paneles");
         c1.setAlignment(Pos.CENTER);
         border.setTop(c1);
-        JFXTextField nFac = new JFXTextField();
-        nFac.setPromptText("Numero de Factura");
-        nFac.setLabelFloat(true);
-        HBox contFac = new HBox(nFac);
+        JFXTextField nOrden = new JFXTextField();
+        nOrden.setPromptText("Numero de Órden");
+        nOrden.setLabelFloat(true);
+        HBox contOrden = new HBox(nOrden);
         
         if(!b){
             ImageView img = new ImageView(new Image("/recursos/iconos/lupa2.png"));
@@ -76,19 +76,19 @@ public class PanelPedidoRegistro extends PanelGenerico{
                 HBox contImagen = new HBox(img);
                 contImagen.setAlignment(Pos.CENTER);
                 contImagen.setOnMouseClicked(new ManejadorBuscarFactura(true));
-            contFac.getChildren().add(contImagen);
+            contOrden.getChildren().add(contImagen);
         }
         
         JFXTextField nombre = new JFXTextField();
-        nombre.setPromptText("Nombre del Cliente");
+        nombre.setPromptText("Nombre del Proveedor");
         nombre.getStyleClass().add("jfx-texto-largo");
         nombre.setLabelFloat(true);
         
-        JFXTextField cedula = new JFXTextField();
-        cedula.setPromptText("Cédula");
-        cedula.setLabelFloat(true);
+        JFXTextField ruc = new JFXTextField();
+        ruc.setPromptText("RUC ");
+        ruc.setLabelFloat(true);
                 
-        HBox contCedula = new HBox(cedula);
+        HBox contRuc = new HBox(ruc);
         if(b){
             
             ImageView img= new ImageView(new Image("/recursos/iconos/lupa2.png"));
@@ -96,12 +96,12 @@ public class PanelPedidoRegistro extends PanelGenerico{
             img.setFitWidth(45);
             HBox contImagen = new HBox(img);
             contImagen.setOnMouseClicked(new ManejadorBuscarCleinte(true));
-            contCedula.getChildren().add(contImagen);
+            contRuc.getChildren().add(contImagen);
         }
         
-        JFXTextField tipo = new JFXTextField();
-        tipo.setPromptText("Tipo de Cliente");
-        tipo.setLabelFloat(true);
+        JFXTextField razonSocial = new JFXTextField();
+        razonSocial.setPromptText("Razón Social");
+        razonSocial.setLabelFloat(true);
         
         JFXDatePicker fecha = new JFXDatePicker();
         fecha.setDefaultColor(Color.web("005683"));
@@ -109,23 +109,23 @@ public class PanelPedidoRegistro extends PanelGenerico{
         fecha.setPromptText("Fecha");
         //fecha.setLabelFloat(true);
         
-        VBox cont1 = new VBox(contFac, fecha);
+        VBox cont1 = new VBox(contOrden, fecha);
         cont1.setSpacing(30);
         cont1.setMaxWidth(400);
         cont1.setAlignment(Pos.TOP_LEFT);
                 
-        //nombre, tipo
+        //nombre, razonSocial
         
-        JFXTextField descuento = new JFXTextField();
-        descuento.setPromptText("Descuentos");
-        descuento.setLabelFloat(true);
+        JFXTextField telf = new JFXTextField();
+        telf.setPromptText("Teléfono");
+        telf.setLabelFloat(true);
         
-        VBox cont2 = new VBox(contCedula, descuento);
+        VBox cont2 = new VBox(contRuc, telf);
         cont2.setSpacing(30);
         cont2.setMaxWidth(400);
         cont2.setAlignment(Pos.TOP_LEFT);
         
-        VBox cont3 = new VBox(nombre, tipo);
+        VBox cont3 = new VBox(nombre, razonSocial);
         cont3.setSpacing(30);
         cont3.setMaxWidth(400);
         cont3.setAlignment(Pos.TOP_LEFT);
@@ -335,7 +335,7 @@ public class PanelPedidoRegistro extends PanelGenerico{
                 JFXButton btnRegistrar = new JFXButton("Registrar Nueva");
                 btnRegistrar.setOnAction((e) -> {
                     if(diag != null)diag.close();
-                    PanelPedidoRegistro pR = new PanelPedidoRegistro(stage,root, b);
+                    PanelOrdenesRegistro pR = new PanelOrdenesRegistro(stage,root, b);
                     stage.getScene().setRoot(pR.getRoot());
                 });
                 diag = Metodos.dialogoMaterial(root, "No existe una factura con ese numero", btnRegistrar);
