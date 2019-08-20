@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/08/2019 04:31:37 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Orden" table="orden" catalog="frigoccdb" optimistic-lock="version">
+        <id name="ordenId" type="int">
+            <column name="orden_id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="proveedor" class="modelo.Proveedor" fetch="select">
+            <column name="proveedor_id" not-null="true" />
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="10" not-null="true" />
+        </property>
+        <property name="observaciones" type="string">
+            <column name="observaciones" length="50" />
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado" />
+        </property>
+        <set name="ordenProductos" table="orden_producto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="orden_id" not-null="true" />
+            </key>
+            <one-to-many class="modelo.OrdenProducto" />
+        </set>
+    </class>
+</hibernate-mapping>

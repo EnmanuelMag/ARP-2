@@ -12,6 +12,8 @@ import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
+import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import static constantes.Constantes.BOTON;
 import static constantes.Constantes.BOTONA;
 import static constantes.Constantes.ESPACIADO;
@@ -40,54 +42,66 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import static constantes.Constantes.FILTRO_POR_ORDENES;
+import controlador.DB;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TreeItem;
+import javafx.util.Callback;
+import modelo.Factura;
+import modelo.Orden;
+import modelo.Proveedor;
 
 /**
  *
  * @author emman
  */
-public class PanelOrdenesPrincipal extends PanelGenerico{
-    
-   
+public class PanelOrdenesPrincipal extends PanelGenerico {
+
     private HBox contMain;
     private VBox contDetalle;
     private boolean primero = true;
     private VBox contSp;
-   
+    private SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
     private JFXDialog diag;
-    
-    public PanelOrdenesPrincipal(Stage p,StackPane lastRoot){
+    private JFXTreeTableView<Orden> ordenesT;
+    private List<Orden> ordenes;
+
+    public PanelOrdenesPrincipal(Stage p, StackPane lastRoot) {
         super(p, lastRoot);
-        
- 
+        ordenes=(List<Orden>)DB.getAll(Orden.class);
         super.border.setCenter(crearCentro());
-        
+
         p.getScene().getStylesheets().clear();
         p.getScene().getStylesheets().add(getRutaCssFile());
     }
-    
-    
-    public VBox crearCentro(){
-        
+
+    public VBox crearCentro() {
+
         HBox c1 = new HBox(new Label("ÓRDENES"));
         c1.getStyleClass().add("label-titulos-paneles");
         c1.setAlignment(Pos.CENTER);
         border.setTop(c1);
-       
+
         //Cuando se seleccione un tipo de filtrador se hace un query para conocer las opciones
         //Si es por producto, se ingresa el nombre en el textfield que se mostrara
         //Si es proveedor, lo mismo
         //Si es por estado (recivido (completo), parcialmente, pendiente)
-        
         JFXComboBox<String> filtrarPor = new JFXComboBox<>();
         HBox contFiltro = new HBox(new Label("Filtrar por: "), filtrarPor);
         contFiltro.setSpacing(20);
-        
+
         filtrarPor.setItems(FILTRO_POR_ORDENES);
         filtrarPor.setOnAction(e -> {
-            if(filtrarPor.getValue()!=null){
-                if(contFiltro.getChildren().size()==3) contFiltro.getChildren().remove(2);
-                switch(filtrarPor.getValue()){
-                    
+            if (filtrarPor.getValue() != null) {
+                if (contFiltro.getChildren().size() == 3) {
+                    contFiltro.getChildren().remove(2);
+                }
+                switch (filtrarPor.getValue()) {
+
                     case "PRODUCTO":
                         JFXTextField nProd = new JFXTextField();
                         nProd.setPromptText("Nombre del Producto");
@@ -126,88 +140,113 @@ public class PanelOrdenesPrincipal extends PanelGenerico{
                 }
             }
         });
-        
+
         JFXButton registrar = new JFXButton("REGISTRAR NUEVA");
         registrar.getStyleClass().add("jfx-button-registrar");
         registrar.setOnAction(e -> {
             PanelOrdenesRegistro pR = new PanelOrdenesRegistro(stage, root, true);
             stage.getScene().setRoot(pR.getRoot());
         });
-        
+
         HBox contRoot = new HBox(contFiltro);
         contRoot.setPadding(ESPACIADO_FILTROS);
-        contRoot.getStyleClass().add("contCategoriaBackground");
         
+
         HBox contTop = new HBox(contRoot, registrar);
         contTop.setSpacing(80);
         contTop.setAlignment(Pos.CENTER_LEFT);
+
         
-        JFXTreeTableView ordenes = new JFXTreeTableView<>();
         JFXTreeTableColumn nOrden = new JFXTreeTableColumn<>("N° Órden");
         nOrden.setPrefWidth(200);
+        nOrden.setCellValueFactory(new Callback<JFXTreeTableColumn.CellDataFeatures<Orden, String>, ObservableValue<String>>() {
+                public ObservableValue<String> call(JFXTreeTableColumn.CellDataFeatures<Orden, String> orden) {
+                    return new ReadOnlyObjectWrapper(orden.getValue().getValue().getOrdenId());
+                }});
+        
+        
         JFXTreeTableColumn proveedor = new JFXTreeTableColumn<>("Proveedor");
         proveedor.setPrefWidth(300);
-        JFXTreeTableColumn fecha_pedido = new JFXTreeTableColumn<>("Fecha de la Órden");
-        fecha_pedido.setPrefWidth(400);
+        proveedor.setCellValueFactory(new Callback<JFXTreeTableColumn.CellDataFeatures<Orden, String>, ObservableValue<String>>() {
+                public ObservableValue<String> call(JFXTreeTableColumn.CellDataFeatures<Orden, String> orden) {
+                    return new ReadOnlyObjectWrapper(orden.getValue().getValue().getProveedor().getRazonSocial());
+                }});
+        
+        JFXTreeTableColumn fechaOrden = new JFXTreeTableColumn<>("Fecha de la Órden");
+        fechaOrden.setPrefWidth(400);
+        fechaOrden.setCellValueFactory(new Callback<JFXTreeTableColumn.CellDataFeatures<Orden, String>, ObservableValue<String>>() {
+                public ObservableValue<String> call(JFXTreeTableColumn.CellDataFeatures<Orden, String> orden) {
+                    return new ReadOnlyObjectWrapper(dateFormat.format(orden.getValue().getValue().getFecha()));
+                }});
+        
         JFXTreeTableColumn estado = new JFXTreeTableColumn<>("Estado");
         estado.setPrefWidth(300);
-        ordenes.getColumns().setAll(nOrden, proveedor, fecha_pedido, estado);
-        ordenes.setMinHeight(500);
+        estado.setCellValueFactory(new Callback<JFXTreeTableColumn.CellDataFeatures<Orden, String>, ObservableValue<String>>() {
+                public ObservableValue<String> call(JFXTreeTableColumn.CellDataFeatures<Orden, String> orden) {
+                    //Orden o=orden.getValue().getValue();
+                    //subtotal
+                    return new ReadOnlyObjectWrapper("Null");
+                }});
         
-        VBox contRoot2 = new VBox(contTop, ordenes);
+        ObservableList<Orden> proveedoresOL = FXCollections.observableArrayList();
+        proveedoresOL.addAll(this.ordenes);
+
+        TreeItem<Orden> root = new RecursiveTreeItem<>(proveedoresOL, RecursiveTreeObject::getChildren);
+        ordenesT = new JFXTreeTableView<>(root);
+        ordenesT.setShowRoot(false);
+        ordenesT.setEditable(false);
+        ordenesT.getColumns().setAll(nOrden, proveedor, fechaOrden, estado);
+        ordenesT.setMinHeight(500);
+
+        VBox contRoot2 = new VBox(contTop, ordenesT);
         contRoot2.setSpacing(40);
         contRoot2.setCenterShape(true);
         contRoot2.setPadding(ESPACIADO2);
-        
+
         return contRoot2;
     }
-    
-    
-    
-    
-    
-  
-    
-    public class ManejadorBuscarCleinte implements EventHandler{
+
+    public class ManejadorBuscarCleinte implements EventHandler {
 
         boolean b;
-        
-        public ManejadorBuscarCleinte(boolean b){
+
+        public ManejadorBuscarCleinte(boolean b) {
             this.b = b;
         }
-        
+
         @Override
         public void handle(Event event) {
-            
-            int r = (int) (Math.random() * 1); 
+
+            int r = (int) (Math.random() * 1);
             System.out.println(r);
-            if(r==0){
+            if (r == 0) {
                 JFXButton btnRegistrar = new JFXButton("Registrar Nuevo");
                 btnRegistrar.setOnAction((e) -> {
-                    if(diag != null)diag.close();
-                    PanelClienteRegistro pR = new PanelClienteRegistro(stage,root, b);
+                    if (diag != null) {
+                        diag.close();
+                    }
+                    PanelOrdenesRegistro pR = new PanelOrdenesRegistro(stage, root, b);
                     stage.getScene().setRoot(pR.getRoot());
                 });
                 diag = Metodos.dialogoMaterial(root, "No existe un cliente con ese numero", btnRegistrar);
-            }
-            else{
+            } else {
                 Metodos.dialogoMaterial(root, "Busqueda", "Se encontro un cliente con ese numero", "Cerrar");
             }
         }
-        }
-    
-    public Scene getScene(){
-        
-        Scene escena=new Scene(getRoot(),1280,720);
+    }
+
+    public Scene getScene() {
+
+        Scene escena = new Scene(getRoot(), 1280, 720);
         escena.getStylesheets().add(getRutaCssFile());
         return escena;
     }
-    
-    public StackPane getRoot(){
+
+    public StackPane getRoot() {
         return root;
     }
-    
-    public String getRutaCssFile(){
+
+    public String getRutaCssFile() {
         return Class.class.getResource("/recursos/estilo-PanelOrdenes.css").toExternalForm();
     }
 }

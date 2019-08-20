@@ -10,40 +10,53 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
-import static constantes.Constantes.ESPACIADO;
 import static constantes.Constantes.TEXTS;
-import static constantes.Constantes.TIPO_CLIENTES;
 import constantes.Metodos;
-import javafx.event.Event;
+import controlador.DB;
+import java.util.ArrayList;
+import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import modelo.Cliente;
+import modelo.TipoCliente;
+
 
 /**
  *
  * @author emman
  */
-public class PanelClienteRegistro extends PanelGenerico{
+public final class PanelClienteRegistro extends PanelGenerico{
     
     JFXDialog diag;
     boolean b;
+    JFXTextField nombre;
+    JFXTextField apellido;
+    JFXTextField cedula;
+    JFXTextField descuento;
+    JFXTextField direccion;
+    JFXTextField telefono;
+    JFXComboBox<TipoCliente> tipoBox;
+    List<TipoCliente> tipoC;
+    
     
     public PanelClienteRegistro(Stage s,StackPane lastRoot,  boolean b){
         super(s,lastRoot);
+        this.tipoC = (List<TipoCliente>) DB.getAll(TipoCliente.class);
         this.b = b;
         s.getScene().getStylesheets().clear();
         s.getScene().getStylesheets().add(getRutaCssFile());
         super.border.setCenter(crearFormulario());
         setTop();
+        
     }
     
     public void setTop(){
@@ -59,46 +72,37 @@ public class PanelClienteRegistro extends PanelGenerico{
     public HBox crearFormulario(){
        
         
-        JFXTextField nombre = new JFXTextField();
+        nombre = new JFXTextField();
         nombre.setPromptText("Nombre");
-        
         nombre.setMinWidth(TEXTS);
         nombre.setPrefWidth(TEXTS);
         nombre.setLabelFloat(true);
         
-        JFXTextField apellido = new JFXTextField();
+        apellido = new JFXTextField();
         
         apellido.setPromptText("Apellido");
         apellido.setLabelFloat(true);
         apellido.setMinWidth(TEXTS);
                 
-        JFXTextField cedula = new JFXTextField();
+        cedula = new JFXTextField();
         cedula.setPromptText("Cédula");
         cedula.setLabelFloat(true);
                 
         HBox contCedula = new HBox(cedula);
-        if(!b){
-            
-            ImageView img= new ImageView(new Image("/recursos/iconos/lupa2.png"));
-            img.setFitHeight(45);
-            img.setFitWidth(45);
-            HBox contImagen = new HBox(img);
-            
-            contCedula.getChildren().add(contImagen);
-        }
         
-        JFXTextField descuento = new JFXTextField();
+        descuento = new JFXTextField();
         descuento.setPromptText("Descuento");
         descuento.setLabelFloat(true);
+        descuento.setEditable(false);
         
-        JFXTextField direccion = new JFXTextField();
+        direccion = new JFXTextField();
         direccion.setPromptText("Dirección");
         
         direccion.setMinWidth(TEXTS);
         direccion.setPrefWidth(TEXTS);
         direccion.setLabelFloat(true);
         
-        JFXTextField telefono = new JFXTextField();
+        telefono = new JFXTextField();
         telefono.setPromptText("Teléfono");
         telefono.setMaxWidth(160);
         telefono.setLabelFloat(true);
@@ -108,29 +112,21 @@ public class PanelClienteRegistro extends PanelGenerico{
        
         cont1.setAlignment(Pos.TOP_LEFT);
         
-        JFXComboBox tipoBox = new JFXComboBox();
-        tipoBox.setItems(TIPO_CLIENTES); 
-        HBox contBox = Metodos.crearPanel(new Label("Tipo"), tipoBox);
+        tipoBox = new JFXComboBox();
+        tipoBox.setItems(FXCollections.observableArrayList(this.tipoC)); 
         
-        JFXToggleButton estado = new JFXToggleButton();
-        estado.setText("Inactivo");
-        estado.setOnAction((e) -> {
-            
-            if(estado.isSelected()){
-                estado.setText("Activo");
-            }
-            else{
-                estado.setText("Inactivo");
-            }
-        
+        tipoBox.setOnAction((p)->{ 
+            TipoCliente tipo=tipoBox.getSelectionModel().getSelectedItem();
+            if(tipo!=null){
+                descuento.setText(String.valueOf(tipo.getDescuento()));
+            };
         });
         
-        JFXTextField saldo = new JFXTextField();
-        saldo.setPromptText("Saldo");
-        saldo.setMaxWidth(150);
-        saldo.setLabelFloat(true);
+        HBox contBox = Metodos.crearPanel(new Label("Tipo"), tipoBox);
         
-        VBox cont2 = new VBox(direccion, telefono, contBox, estado, saldo);
+        
+        
+        VBox cont2 = new VBox(direccion, telefono, contBox);
         cont2.setSpacing(65);
         
         cont2.setAlignment(Pos.TOP_LEFT);
@@ -139,13 +135,41 @@ public class PanelClienteRegistro extends PanelGenerico{
         contMain.setMaxHeight(380);
         contMain.setSpacing(40);
         contMain.setAlignment(Pos.CENTER);
+        contMain.getStyleClass().add("contMain_");
+        contMain.setMaxWidth(500);
         
         JFXButton registrar = new JFXButton("Registrar");
+        registrar.setOnAction((w)->{
+            if (this.formularioLLeno()) {
+                Cliente c = new Cliente();
+                c.setNombres(nombre.getText());
+                c.setApellidos(apellido.getText());
+                c.setRuc(cedula.getText());
+                c.setDireccion(direccion.getText());
+                c.setTelefono(telefono.getText());
+                c.setTipoCliente(tipoBox.getValue());
+                DB.agregar(c);
+                Metodos.dialogoMaterial(root, "Datos", "Se ha guardado nuevo cliente", "Cerrar");
+            } else {
+
+                Metodos.dialogoMaterial(root, "Datos", "Por favor llene todo el formulario", "Cerrar");
+            }
+        });
         VBox c = new VBox(registrar);
         c.setAlignment(Pos.CENTER);
         border.setBottom(c);
         
-        return contMain;
+        HBox main = new HBox(contMain);
+        main.setAlignment(Pos.CENTER);
+        return main;
+    }
+    public boolean formularioLLeno(){
+        if(tipoBox.getValue()==null || nombre.getText().equals("") || apellido.getText().equals("")
+                || cedula.getText().equals("")|| direccion.getText().equals("")|| telefono.getText().equals("")){
+            return false;
+        }
+        return true;
+        
     }
     
     

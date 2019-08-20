@@ -6,6 +6,7 @@
 package interfaz;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
@@ -13,7 +14,10 @@ import static constantes.Constantes.BOTON;
 import static constantes.Constantes.BOTONA;
 import static constantes.Constantes.ESPACIADO;
 import constantes.Metodos;
+import controlador.DB;
 import java.time.LocalDate;
+import java.util.List;
+import javafx.collections.FXCollections;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -23,6 +27,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -32,6 +37,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import modelo.Proveedor;
+import org.controlsfx.control.textfield.TextFields;
 
 /**
  *
@@ -46,11 +53,13 @@ public class PanelOrdenesRegistro extends PanelGenerico{
     private VBox contSp;
     private boolean b;
     private JFXDialog diag;
+    private JFXTextField nombre;
+    private List<Proveedor> proveedores;
     
     public PanelOrdenesRegistro(Stage p,StackPane lastRoot, boolean b){
         super(p, lastRoot);
         this.b = b;
- 
+        proveedores=(List<Proveedor>)DB.getAll(Proveedor.class);
         super.border.setCenter(crearFormulario());
         
         p.getScene().getStylesheets().clear();
@@ -79,25 +88,17 @@ public class PanelOrdenesRegistro extends PanelGenerico{
             contOrden.getChildren().add(contImagen);
         }
         
-        JFXTextField nombre = new JFXTextField();
+        nombre = new JFXTextField();
         nombre.setPromptText("Nombre del Proveedor");
         nombre.getStyleClass().add("jfx-texto-largo");
-        nombre.setLabelFloat(true);
+        //nombre.setLabelFloat(true);
+        TextFields.bindAutoCompletion(nombre, proveedores);
         
         JFXTextField ruc = new JFXTextField();
         ruc.setPromptText("RUC ");
         ruc.setLabelFloat(true);
                 
         HBox contRuc = new HBox(ruc);
-        if(b){
-            
-            ImageView img= new ImageView(new Image("/recursos/iconos/lupa2.png"));
-            img.setFitHeight(45);
-            img.setFitWidth(45);
-            HBox contImagen = new HBox(img);
-            contImagen.setOnMouseClicked(new ManejadorBuscarCleinte(true));
-            contRuc.getChildren().add(contImagen);
-        }
         
         JFXTextField razonSocial = new JFXTextField();
         razonSocial.setPromptText("Razón Social");
@@ -130,7 +131,7 @@ public class PanelOrdenesRegistro extends PanelGenerico{
         cont3.setMaxWidth(400);
         cont3.setAlignment(Pos.TOP_LEFT);
         
-        contMain = new HBox(cont1, cont2, cont3);
+        contMain = new HBox(cont3, cont2, cont1);
         contMain.setSpacing(110);
         contMain.setAlignment(Pos.CENTER);
         //contMain.setMaxWidth(900);
@@ -271,7 +272,6 @@ public class PanelOrdenesRegistro extends PanelGenerico{
             cant.setLabelFloat(true);
             
             
-            
             JFXTextField costo = new JFXTextField();
             costo.setMaxWidth(135);
             costo.setEditable(false);
@@ -386,6 +386,6 @@ public class PanelOrdenesRegistro extends PanelGenerico{
     }
     
     public String getRutaCssFile(){
-        return Class.class.getResource("/recursos/estilo-PanelPedido.css").toExternalForm();
+        return Class.class.getResource("/recursos/estilo-PanelOrdenes.css").toExternalForm();
     }
 }

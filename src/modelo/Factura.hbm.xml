@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/08/2019 04:31:37 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Factura" table="factura" catalog="frigoccdb" optimistic-lock="version">
+        <id name="facturaId" type="int">
+            <column name="factura_id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="cliente" class="modelo.Cliente" fetch="select">
+            <column name="cliente_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="establecimiento" class="modelo.Establecimiento" fetch="select">
+            <column name="tienda_id" not-null="true" />
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="10" not-null="true" />
+        </property>
+        <property name="subTotal" type="big_decimal">
+            <column name="subTotal" precision="6" not-null="true" />
+        </property>
+        <property name="descuento" type="big_decimal">
+            <column name="descuento" precision="3" not-null="true" />
+        </property>
+        <property name="cargo" type="big_decimal">
+            <column name="cargo" precision="3" not-null="true" />
+        </property>
+        <property name="iva" type="big_decimal">
+            <column name="iva" precision="3" />
+        </property>
+        <set name="ventas" table="venta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="factura_id" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Venta" />
+        </set>
+    </class>
+</hibernate-mapping>

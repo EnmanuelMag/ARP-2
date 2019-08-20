@@ -7,41 +7,32 @@ package interfaz;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
-import static constantes.Constantes.BOTON;
-import static constantes.Constantes.BOTONA;
-import static constantes.Constantes.ESPACIADO;
-import static constantes.Constantes.ESPACIADO2;
-import static constantes.Constantes.ESPACIADO_FILTROS;
-import static constantes.Constantes.ESTADO;
-import constantes.Metodos;
-import java.time.LocalDate;
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
+import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import static constantes.Constantes.*;
+import controlador.DB;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Separator;
+import javafx.scene.control.TreeItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import static constantes.Constantes.FILTRO_POR_ORDENES;
-import static constantes.Constantes.FILTRO_POR_PEDIDOS;
-import static constantes.Constantes.TIPO_CLIENTES;
+import javafx.util.Callback;
+import modelo.*;
 
 /**
  *
@@ -55,10 +46,15 @@ public class PanelPedidosPrincipal extends PanelGenerico{
    
     private JFXDialog diag;
     
+    private SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+    private JFXTreeTableView<Pedido> pedidosT;
+    private List<Pedido> pedidos;
+    
     public PanelPedidosPrincipal(Stage p,StackPane lastRoot){
         super(p, lastRoot);
         
- 
+        pedidos=(List<Pedido>)DB.getAll(Pedido.class);
+        System.out.println(pedidos);
         super.border.setCenter(crearCentro());
         
         p.getScene().getStylesheets().clear();
@@ -127,65 +123,75 @@ public class PanelPedidosPrincipal extends PanelGenerico{
         
         HBox contRoot = new HBox(contFiltro);
         contRoot.setPadding(ESPACIADO_FILTROS);
-        contRoot.getStyleClass().add("contCategoriaBackground");
+       
         
         HBox contTop = new HBox(contRoot, registrar);
         contTop.setSpacing(80);
         contTop.setAlignment(Pos.CENTER_LEFT);
         
-        JFXTreeTableView ordenes = new JFXTreeTableView<>();
         JFXTreeTableColumn nOrden = new JFXTreeTableColumn<>("N° Pedido");
         nOrden.setPrefWidth(200);
+        nOrden.setCellValueFactory(new Callback<JFXTreeTableColumn.CellDataFeatures<Pedido, String>, ObservableValue<String>>() {
+                public ObservableValue<String> call(JFXTreeTableColumn.CellDataFeatures<Pedido, String> orden) {
+                    return new ReadOnlyObjectWrapper(orden.getValue().getValue().getPedidoId());
+        }});
+        
         JFXTreeTableColumn proveedor = new JFXTreeTableColumn<>("Nombre del Cliente");
         proveedor.setPrefWidth(300);
+        proveedor.setCellValueFactory(new Callback<JFXTreeTableColumn.CellDataFeatures<Pedido, String>, ObservableValue<String>>() {
+                public ObservableValue<String> call(JFXTreeTableColumn.CellDataFeatures<Pedido, String> orden) {
+                    Cliente c=orden.getValue().getValue().getCliente();
+                    return new ReadOnlyObjectWrapper(c.getNombres()+" "+c.getApellidos());
+        }});
+        
         JFXTreeTableColumn fecha_pedido = new JFXTreeTableColumn<>("Fecha de Pedido");
-        fecha_pedido.setPrefWidth(400);
+        fecha_pedido.setPrefWidth(300);
+        fecha_pedido.setCellValueFactory(new Callback<JFXTreeTableColumn.CellDataFeatures<Pedido, String>, ObservableValue<String>>() {
+                public ObservableValue<String> call(JFXTreeTableColumn.CellDataFeatures<Pedido, String> orden) {
+                    return new ReadOnlyObjectWrapper(dateFormat.format(orden.getValue().getValue().getFecha()));
+        }});
+        
+        
         JFXTreeTableColumn estado = new JFXTreeTableColumn<>("Estado");
         estado.setPrefWidth(300);
-        ordenes.getColumns().setAll(nOrden, proveedor, fecha_pedido, estado);
-        ordenes.setMinHeight(500);
+        estado.setCellValueFactory(new Callback<JFXTreeTableColumn.CellDataFeatures<Pedido, String>, ObservableValue<String>>() {
+                public ObservableValue<String> call(JFXTreeTableColumn.CellDataFeatures<Pedido, String> orden) {
+                    //Orden o=orden.getValue().getValue();
+                    //subtotal
+                    if(orden.getValue().getValue().getEstado()){
+                        
+                        return new ReadOnlyObjectWrapper("Facturado");
+                    }
+                        return new ReadOnlyObjectWrapper("No Facturado");
+                }});
         
-        VBox contRoot2 = new VBox(contTop, ordenes);
+        ObservableList<Pedido> proveedoresOL = FXCollections.observableArrayList();
+        proveedoresOL.addAll(this.pedidos);
+
+        TreeItem<Pedido> root = new RecursiveTreeItem<>(proveedoresOL, RecursiveTreeObject::getChildren);
+        pedidosT = new JFXTreeTableView<>(root);
+        pedidosT.setShowRoot(false);
+        pedidosT.setEditable(false);
+        pedidosT.getColumns().setAll(nOrden, proveedor, fecha_pedido, estado);
+        pedidosT.setMinHeight(500);
+        
+        pedidosT.setOnMouseClicked((t)->{
+            Pedido p=pedidosT.getSelectionModel().getSelectedItem().getValue();
+            //getEstado false es que no ha sido facturada
+            if(p!=null && !p.getEstado()){
+                this.stage.getScene().setRoot(new PanelFacturaRegistro(this.stage,this.root,p).getRoot());
+                
+            }
+        });
+        
+        VBox contRoot2 = new VBox(contTop, pedidosT);
         contRoot2.setSpacing(40);
         contRoot2.setCenterShape(true);
         contRoot2.setPadding(ESPACIADO2);
         
         return contRoot2;
     }
-    
-    
-    
-    
-    
-  
-    
-    public class ManejadorBuscarCleinte implements EventHandler{
 
-        boolean b;
-        
-        public ManejadorBuscarCleinte(boolean b){
-            this.b = b;
-        }
-        
-        @Override
-        public void handle(Event event) {
-            
-            int r = (int) (Math.random() * 1); 
-            System.out.println(r);
-            if(r==0){
-                JFXButton btnRegistrar = new JFXButton("Registrar Nuevo");
-                btnRegistrar.setOnAction((e) -> {
-                    if(diag != null)diag.close();
-                    PanelClienteRegistro pR = new PanelClienteRegistro(stage,root, b);
-                    stage.getScene().setRoot(pR.getRoot());
-                });
-                diag = Metodos.dialogoMaterial(root, "No existe un cliente con ese numero", btnRegistrar);
-            }
-            else{
-                Metodos.dialogoMaterial(root, "Busqueda", "Se encontro un cliente con ese numero", "Cerrar");
-            }
-        }
-        }
     
     public Scene getScene(){
         
@@ -199,6 +205,6 @@ public class PanelPedidosPrincipal extends PanelGenerico{
     }
     
     public String getRutaCssFile(){
-        return Class.class.getResource("/recursos/estilo-PanelOrdenes.css").toExternalForm();
+        return Class.class.getResource("/recursos/estilo-PanelPedido.css").toExternalForm();
     }
 }

@@ -25,10 +25,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import sistema.ClienteDB;
-import sistema.Factura;
-import sistema.ReporteDB;
-import sistema.VentaPorCliente;
+
 
 /**
  *
@@ -62,7 +59,7 @@ public class SubPanelReporteVentas extends PanelGenerico {
         ((BorderPane)super.getBorder()).setCenter(centroDefecto());
         
     }
-    
+    /*
     public TableView<VentaPorCliente> getTablaDefecto(){
         TableView<VentaPorCliente> tablaTotales=new TableView<>();
         
@@ -83,7 +80,7 @@ public class SubPanelReporteVentas extends PanelGenerico {
         //String hasta=formato.format(this.hasta);
         //tablaTotales.setItems(FXCollections.observableArrayList(ReporteDB.getVentasClientes(desde, hasta)));
         return tablaTotales;
-    }
+    }*/
     
     public GridPane gridFiltros(){
         GridPane filtros=new GridPane();
@@ -119,7 +116,7 @@ public class SubPanelReporteVentas extends PanelGenerico {
         cCentro.setSpacing(20);
         cCentro.setPadding(new Insets(20));
         cCentro.getChildren().add(gridFiltros());
-        cCentro.getChildren().add(getTablaDefecto());
+        //cCentro.getChildren().add(getTablaDefecto());
         return cCentro;
         
     }

@@ -14,6 +14,9 @@ import static constantes.Constantes.BOTON;
 import static constantes.Constantes.BOTONA;
 import static constantes.Constantes.CATG_PRODUCTOS;
 import constantes.Metodos;
+import controlador.DB;
+import java.math.BigDecimal;
+import javafx.collections.FXCollections;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -29,6 +32,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import modelo.*;
 
 /**
  *
@@ -38,6 +42,14 @@ public class PanelProductoRegistro  extends PanelGenerico{
     
     private JFXDialog diag;
     private boolean b;
+    HBox contNombre;
+    JFXToggleButton estado;
+    JFXTextField utilidad;
+    JFXTextField costo;
+    JFXTextField decripcion;
+    JFXComboBox<Categoria> categBox;
+    JFXComboBox<Proveedor> proveBox;
+    JFXTextField nombre;
     
    //estilo-PanelProducto.css
     
@@ -48,8 +60,8 @@ public class PanelProductoRegistro  extends PanelGenerico{
         this.b = b;
         super.border.setCenter(crearFormulario());
         setTop();
-        s.getScene().getStylesheets().clear();
-        s.getScene().getStylesheets().add(getRutaCssProducto());
+        stage.getScene().getStylesheets().clear();
+        stage.getScene().getStylesheets().add(getRutaCssProducto());
     }
     
     public void setTop(){
@@ -69,29 +81,17 @@ public class PanelProductoRegistro  extends PanelGenerico{
     public HBox crearFormulario(){
        
         
-        HBox contNombre = new HBox();
+        contNombre = new HBox();
         
         contNombre.setAlignment(Pos.CENTER_LEFT);
         
-            JFXTextField nombre = new JFXTextField();
+            nombre = new JFXTextField();
             nombre.setPromptText("Nombre");
             nombre.getStyleClass().add("jfx-texto-largo");
             nombre.setLabelFloat(true);
             contNombre.getChildren().add(nombre);
         
-        if(!b){
-            ImageView img = new ImageView(new Image("/recursos/iconos/lupa2.png"));
-                img.setFitHeight(45);
-                img.setFitWidth(45);
-                HBox contImagen = new HBox(img);
-                contImagen.setAlignment(Pos.CENTER);
-                contImagen.setOnMouseClicked(new ManejadorBuscarProducto(true));
-            contNombre.getChildren().add(contImagen);
-            System.out.println(b);
-        }
-        
-        
-        JFXToggleButton estado = new JFXToggleButton();
+        estado = new JFXToggleButton();
         estado.setSelected(true);
         estado.setText("En Producción");
         estado.setOnAction((e) -> {
@@ -104,17 +104,17 @@ public class PanelProductoRegistro  extends PanelGenerico{
             }
         });
         
-        JFXTextField utilidad = new JFXTextField();
+        utilidad = new JFXTextField();
         utilidad.setPromptText("Utilidad");
         utilidad.setMaxWidth(150);
         utilidad.setLabelFloat(true);
         
-        JFXTextField costo = new JFXTextField();
+        costo = new JFXTextField();
         costo.setPromptText("Costo");
         costo.setMaxWidth(150);
         costo.setLabelFloat(true);
         
-        JFXTextField decripcion = new JFXTextField();
+        decripcion = new JFXTextField();
         decripcion.setPromptText("Decripcion");
         decripcion.getStyleClass().add("jfx-texto-largo2");
         
@@ -125,16 +125,18 @@ public class PanelProductoRegistro  extends PanelGenerico{
        
         cont1.setAlignment(Pos.TOP_LEFT);
 
-        JFXButton examinar = new JFXButton("Examinar");
-        examinar.setPadding(BOTONA);
-        HBox contFoto = Metodos.crearPanel(new Label("Foto"), examinar);
-        contFoto.setSpacing(15);
         
-        JFXComboBox categBox = new JFXComboBox();
-        categBox.setItems(CATG_PRODUCTOS); 
+        categBox = new JFXComboBox();
+        categBox.setItems(FXCollections.observableList(DB.getAll(Categoria.class))); 
+        
         HBox contBox = Metodos.crearPanel(new Label("Categoria: "), categBox);
-
-        VBox cont2 = new VBox(estado, contFoto, contBox);
+        
+        proveBox = new JFXComboBox();
+        proveBox.setItems(FXCollections.observableList(DB.getAll(Proveedor.class))); 
+        
+        HBox contBox2 = Metodos.crearPanel(new Label("Proveedor: "), proveBox);
+        
+        VBox cont2 = new VBox(estado, contBox,contBox2);
         cont2.setSpacing(65);
  
         cont2.setAlignment(Pos.TOP_LEFT);
@@ -144,8 +146,46 @@ public class PanelProductoRegistro  extends PanelGenerico{
         contMain.setMaxHeight(400);
         contMain.setAlignment(Pos.CENTER);
         contMain.setPadding(new Insets(50,0,0,0)); 
-   
-        return contMain;
+        contMain.getStyleClass().add("contMain_");
+        
+        JFXButton registrar = new JFXButton("Registrar");
+        registrar.setOnMouseClicked(e -> {
+            if(formularioLLeno()){
+                Producto p = new Producto();
+
+                p.setProveedor(proveBox.getValue());
+                p.setCategoria(categBox.getValue());
+                p.setCosto(BigDecimal.valueOf(Float.valueOf(costo.getText())));
+                p.setDescontinuado(this.estado.isSelected());
+                p.setDescripcion(this.decripcion.getText());
+                p.setNombre(nombre.getText());
+                p.setUtilidad(BigDecimal.valueOf(Float.valueOf(this.utilidad.getText())));
+                DB.agregar(p);
+                Metodos.dialogoMaterial(root, "Datos", "Se ha guardado nuevo producto", "Cerrar");
+            }else{
+                Metodos.dialogoMaterial(root, "Datos", "Por favor llene todo el formulario", "Cerrar");
+                
+            }
+            
+            
+        });
+        VBox c = new VBox(registrar);
+        c.setAlignment(Pos.CENTER);
+        border.setBottom(c);
+        
+        HBox main = new HBox(contMain);
+        main.setAlignment(Pos.CENTER);
+        return main;
+    }
+    
+    public boolean formularioLLeno(){
+        if(proveBox.getValue()==null || categBox.getValue()==null || 
+                costo.getText().equals("") || nombre.getText().equals("")
+                || utilidad.getText().equals("")){
+            return false;
+        }
+        return true;
+        
     }
     
     public class ManejadorBuscarProducto implements EventHandler{
@@ -188,7 +228,7 @@ public class PanelProductoRegistro  extends PanelGenerico{
     }
     
     public String getRutaCssFile(){
-        return Class.class.getResource("/recursos/estiloFrancis.css").toExternalForm();
+        return Class.class.getResource("/recursos/estilo-PanelProducto.css").toExternalForm();
     }
 }
 

@@ -111,8 +111,8 @@ and open the template in the editor.
 
 .jfx-button {
      -jfx-button-type: RAISED;
-     -fx-background-color: #c9edf0;
-     -fx-border-color: #005683; 
+     -fx-background-color: #defff0;
+     -fx-border-color: #087c46; 
      -fx-text-fill: #000000;
      -fx-border-width: 1pt;
      -fx-font-size: 16;
@@ -123,15 +123,9 @@ and open the template in the editor.
 }
 
 .jfx-button-registrar{
-    -jfx-button-type: RAISED;
-     -fx-background-color: #c9edf0;
-     -fx-border-color: #005683; 
-     -fx-text-fill: #000000;
-     -fx-border-width: 1pt;
+    
      -fx-font-size: 18;
-     -fx-border-radius: 10pt;
-     -fx-background-radius: 10pt;
-     -fx-padding: 8;
+     
 }
 
 .jfx-button-subIncio {
@@ -435,7 +429,7 @@ and open the template in the editor.
 }
 
 .jfx-combo-box{
-    -jfx-focus-color: #005683;
+    -jfx-focus-color: #087c46;
     
 }
 

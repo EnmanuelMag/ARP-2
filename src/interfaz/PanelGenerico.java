@@ -88,6 +88,4 @@ public class PanelGenerico {
         return border;
     }
     
-    
-    
 }

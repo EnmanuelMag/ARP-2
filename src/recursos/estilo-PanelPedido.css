@@ -28,13 +28,16 @@ and open the template in the editor.
 
 .contInfo{
     -fx-border-width: 2;
+    -fx-background-color: #f0fdff;
     -fx-border-color: #292b2d;
     -fx-max-height: 300px;
     -fx-background-radius: 8pt;
+    -fx-border-radius: 8pt;
 }
 
 .contInfo2{
     -fx-border-width: 2;
+    
     -fx-border-color: #292b2d;
     -fx-min-width: 1000px;
     -fx-background-radius: 8pt;
@@ -42,35 +45,38 @@ and open the template in the editor.
 }
 
 .contBack{
-    -fx-background-color: #ffebe2;
+    -fx-background-color: #f0fdff;
     -fx-border-width: 2;
     -fx-border-color: #292b2d;
     -fx-border-radius: 8pt;
      -fx-background-radius: 8pt;
+     -fx-border-radius: 8pt;
      -fx-max-height: 80px;
-     -fx-max-width: 160px ;   
+     -fx-max-width: 160px ;
+     -fx-padding: 10;
 }
 
 .contBackOnly{
-    -fx-background-color: #ffebe2;
+    -fx-background-color: #d4f9ff;
     -fx-border-width: 2;
     -fx-border-color: #292b2d;
     -fx-border-radius: 8pt;
      -fx-background-radius: 8pt;
+     -fx-padding: 10;
 }
 
 
 .scroll-pane {
     -fx-base: transparent;
-    -fx-background-color: #fff1f1;  
+    -fx-background-color: #d4f9ff;  
 }
 
 .scroll-pane .corner{
-     -fx-background-color: #fff1f1;
+     -fx-background-color: #f0fdff;
 }
 
 .scroll-bar .track {
-    -fx-background-color: #fff1f1;
+    -fx-background-color: #f0fdff;
 }
 
 .scroll-bar .thumb {
@@ -82,7 +88,7 @@ and open the template in the editor.
 
 .scroll-bar > .increment-button > .increment-arrow,
 .scroll-bar > .decrement-button > .decrement-arrow {
-    -fx-background-color: #fff1f1;
+    -fx-background-color: #f0fdff;
 }
 
 .scroll-bar increment-arrow,
@@ -408,7 +414,7 @@ and open the template in the editor.
 }
 
 .texto-cant{
-    -fx-background-color: #ffebe2;
+    -fx-background-color: #f0fdff;
     -fx-border-width: 2;
     -fx-border-color: #292b2d;
     -fx-border-radius: 8pt;

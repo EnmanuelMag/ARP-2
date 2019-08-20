@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/08/2019 04:31:37 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Cliente" table="cliente" catalog="frigoccdb" optimistic-lock="version">
+        <id name="clienteId" type="int">
+            <column name="cliente_id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tipoCliente" class="modelo.TipoCliente" fetch="select">
+            <column name="tipoClienteid" not-null="true" />
+        </many-to-one>
+        <property name="ruc" type="string">
+            <column name="ruc" length="13" not-null="true" />
+        </property>
+        <property name="nombres" type="string">
+            <column name="nombres" length="20" not-null="true" />
+        </property>
+        <property name="apellidos" type="string">
+            <column name="apellidos" length="20" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="50" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="15" />
+        </property>
+        <set name="facturas" table="factura" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cliente_id" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Factura" />
+        </set>
+        <set name="pedidos" table="pedido" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cliente_id" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Pedido" />
+        </set>
+        <set name="prestamoAhorros" table="prestamo_ahorro" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cliente_id" not-null="true" />
+            </key>
+            <one-to-many class="modelo.PrestamoAhorro" />
+        </set>
+    </class>
+</hibernate-mapping>

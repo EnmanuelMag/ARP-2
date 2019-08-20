@@ -21,15 +21,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import sistema.Cliente;
-import sistema.FilaFactura;
-import sistema.Pedido;
+import modelo.Cliente;
+import modelo.Pedido;
 
 /**
  *
  * @author Josue
  */
-public class PanelPedidosFacturar extends PanelGenerico{
+public final class PanelPedidosFacturar extends PanelGenerico{
    
     private LinkedList<Pedido> pedidosPorFacturar;
     private LinkedList<VBox> pedidosTarjeta;
@@ -39,8 +38,7 @@ public class PanelPedidosFacturar extends PanelGenerico{
         super(s, lastRoot);
         super.stage.getScene().getStylesheets().clear();
         super.stage.getScene().getStylesheets().add(getRutaCssFile());
-        cargarPedidos();
-        cargarTarjetaPedidos();
+       
         setRoot();
         setTop();
                 
@@ -80,41 +78,7 @@ public class PanelPedidosFacturar extends PanelGenerico{
         
     }
     
-    public void cargarPedidos(){
-        pedidosPorFacturar=new LinkedList<>();
-        
-        pedidosPorFacturar.add(new Pedido(new Cliente(1,"Josue Alexander","Cobos Salvador","0951749456"," "," "),LocalDate.now()));
-        
-        pedidosPorFacturar.add(new Pedido(new Cliente(2,"Josue Alexander","Cobos Salvador","0951749456"," "," "),LocalDate.now()));
-        
-        pedidosPorFacturar.add(new Pedido(new Cliente(3,"Josue Alexander","Cobos Salvador","0951749456"," "," "),LocalDate.now()));
-        
-        pedidosPorFacturar.add(new Pedido(new Cliente(4,"Josue Alexander","Cobos Salvador","0951749456"," "," "),LocalDate.now()));
-
-    }
-    
-    public void cargarTarjetaPedidos(){
-        pedidosTarjeta=new LinkedList<>();
-        for(Pedido p :pedidosPorFacturar){
-            VBox v=new VBox();
-            JFXButton b=new JFXButton("Facturar");
-            b.setOnMouseClicked((r)->{
-                stage.getScene().setRoot(new PanelFacturaRegistro(stage,root,p).getRoot());
-            });
-            v.getStyleClass().add("tarjetaPedido");
-            v.setAlignment(Pos.CENTER_LEFT);
-            v.setPadding(new Insets(20));
-            GridPane g=new GridPane();
-            g.setVgap(20);
-            g.setHgap(20);
-            g.addColumn(0, new Label("Cédula"), new Label("Nombres"), new Label("Fecha"));
-            g.addColumn(1, new Label(p.getCliente().getCedula()) ,new Label(p.getCliente().getNombreCompleto()), new Label(p.getFecha().toString()));
-            g.add(b,10,2);
-            v.getChildren().add(g);
-            pedidosTarjeta.add(v);
-        }
-        
-        
-    }
+   
+   
     
 }

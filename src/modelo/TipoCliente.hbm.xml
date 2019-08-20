@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/08/2019 04:31:37 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.TipoCliente" table="tipo_cliente" catalog="frigoccdb" optimistic-lock="version">
+        <id name="tipoClienteid" type="int">
+            <column name="tipoClienteid" />
+            <generator class="assigned" />
+        </id>
+        <property name="tipo" type="string">
+            <column name="tipo" length="25" not-null="true" />
+        </property>
+        <property name="descuento" type="big_decimal">
+            <column name="descuento" precision="3" not-null="true" />
+        </property>
+        <set name="clientes" table="cliente" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tipoClienteid" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Cliente" />
+        </set>
+    </class>
+</hibernate-mapping>

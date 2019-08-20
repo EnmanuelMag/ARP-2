@@ -11,6 +11,15 @@ and open the template in the editor.
    -fx-background-color: #fffbf9;
 }
 
+.contMain_{
+    -fx-background-color: #edfcff;
+    -fx-border-width: 2;
+    -fx-border-color: #009bbd;
+    -fx-border-radius: 8pt;
+    -fx-background-radius: 8pt;
+    -fx-padding: 65;
+}
+
 .contInfo{
     -fx-border-width: 2;
     -fx-border-color: #292b2d;
@@ -115,8 +124,8 @@ scroll-pane {
 
 .jfx-button {
      -jfx-button-type: RAISED;
-     -fx-background-color: #dbecf0;
-     -fx-border-color: #067f9b; 
+     -fx-background-color: #e3faff;
+     -fx-border-color: #5c9dab; 
      -fx-text-fill: #000000;
      -fx-font-size: 16;
      -fx-border-width: 1pt;
@@ -376,7 +385,6 @@ scroll-pane {
 }
 
 
-
 .label{
     -fx-text-fill: #2f2f2f;
     -fx-font-size: 20;    
@@ -409,7 +417,7 @@ scroll-pane {
 }
 
 .jfx-combo-box{
-    -jfx-focus-color: #067f9b;
+    -jfx-focus-color: #5c9dab;
     
 }
 

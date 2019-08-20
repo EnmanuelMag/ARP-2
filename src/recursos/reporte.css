@@ -25,6 +25,20 @@ and open the template in the editor.
      -fx-background-radius: 8pt;
 }
 
+.contCategoria{
+    -fx-border-width: 2;
+    -fx-border-color: #292b2d;
+    -fx-max-height: 300px;
+}
+
+.contCategoriaBackground{
+    -fx-background-color: #ffebe2;
+    -fx-border-width: 2;
+    -fx-border-color: #292b2d;
+    -fx-border-radius: 8pt;
+    -fx-background-radius: 8pt;
+}
+
 .scroll-pane {
     -fx-base: #ffffff;
     -fx-background-color: #ffffff;  
@@ -94,12 +108,13 @@ and open the template in the editor.
      -fx-background-color: #ffefee;
      -fx-border-color: #bf3c37; 
      -fx-text-fill: #000000;
-     -fx-font-size: 16;
+     -fx-font-size: 25;
      -fx-border-width: 1pt;
      -fx-border-radius: 8pt;
      -fx-background-radius: 8pt;
      -fx-padding: 8;
-     -fx-pref-width: 140px;
+     -fx-pref-height: 65px;
+     -fx-pref-width: 250px;
      
 }
 

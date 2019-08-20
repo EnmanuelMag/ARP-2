@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/08/2019 04:31:37 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Establecimiento" table="establecimiento" catalog="frigoccdb" optimistic-lock="version">
+        <id name="tiendaId" type="int">
+            <column name="tienda_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="razonSocial" type="string">
+            <column name="razon_social" length="30" not-null="true" />
+        </property>
+        <property name="ruc" type="string">
+            <column name="ruc" length="13" not-null="true" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="30" not-null="true" />
+        </property>
+        <property name="correo" type="string">
+            <column name="correo" length="40" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="40" />
+        </property>
+        <set name="inventarios" table="inventario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tienda_id" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Inventario" />
+        </set>
+        <set name="facturas" table="factura" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tienda_id" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Factura" />
+        </set>
+    </class>
+</hibernate-mapping>

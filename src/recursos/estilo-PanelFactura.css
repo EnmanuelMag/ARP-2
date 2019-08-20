@@ -26,17 +26,39 @@ and open the template in the editor.
 }
 
 .contInfo{
+    -fx-background-color: #f0fdff;
     -fx-border-width: 2;
     -fx-border-color: #292b2d;
     -fx-max-height: 300px;
+    -fx-background-radius: 8pt;
+    -fx-border-radius: 8pt;
+    
 }
 
-.contBack{
-    -fx-background-color: #ffebe2;
+.contInfo2{
+    -fx-border-width: 2;
+    -fx-border-color: #292b2d;
+    -fx-min-width: 1000px;
+    -fx-background-radius: 8pt;
+    -fx-border-radius: 8pt;
+    -fx-padding: 10;
+}
+
+.contBackOnly{
+    -fx-background-color: #d4f9ff;
     -fx-border-width: 2;
     -fx-border-color: #292b2d;
     -fx-border-radius: 8pt;
-     -fx-background-radius: 8pt;
+    -fx-background-radius: 8pt;
+    -fx-padding: 10;
+}
+
+.contBack{
+    -fx-background-color: #f0fdff;
+    -fx-border-width: 2;
+    -fx-border-color: #292b2d;
+    -fx-border-radius: 8pt;
+     fx-background-radius: 8pt;
 }
 
 .tarjetaPedido{
@@ -63,17 +85,17 @@ and open the template in the editor.
      -fx-padding: 8;
 }
 
-scroll-pane {
-    -fx-base: #ffffff;
-    -fx-background-color: #ffffff;  
+.scroll-pane {
+    -fx-base: transparent;
+    -fx-background-color: #d4f9ff;  
 }
 
 .scroll-pane .corner{
-     -fx-background-color: #ffffff/*#ededed;    */
+     -fx-background-color: #f0fdff;
 }
 
 .scroll-bar .track {
-    -fx-background-color: #ffffff/*#ededed;#3c3f41;   */
+    -fx-background-color: #f0fdff;
 }
 
 .scroll-bar .thumb {
@@ -83,23 +105,21 @@ scroll-pane {
     -fx-background-insets: 2,0,0;
 }
 
-
-
 .scroll-bar > .increment-button > .increment-arrow,
 .scroll-bar > .decrement-button > .decrement-arrow {
-    -fx-background-color: #ffffff;
+    -fx-background-color: #f0fdff;
 }
 
 .scroll-bar increment-arrow,
 .scroll-bar decrement-arrow{
-    -fx-background-color: #ffffff;
+    -fx-background-color: transparent;
     -fx-padding: -2;
 }
-
 
 .labelPer{
    -fx-font-size: 28; 
 }
+
 .jfx-button-basic{
      -jfx-button-type: RAISED;
      -fx-background-color: #ffffff;
@@ -111,7 +131,6 @@ scroll-pane {
      -fx-padding: 8;
      
 }
-
 
 .jfx-button {
      -jfx-button-type: RAISED;
@@ -367,15 +386,12 @@ scroll-pane {
      -fx-pref-height: 90px;    
 }
 
-
 .jfx-boton-mod{
     -jfx-button-type: RAISED;
      -fx-background-color: #00a7b6;
      -fx-text-fill: #000000;
      -fx-font-size: 13;
 }
-
-
 
 .label{
     -fx-text-fill: #2f2f2f;
@@ -386,16 +402,17 @@ scroll-pane {
     
     -fx-text-fill: #000000;
     -fx-font-size: 17;   
-    -jfx-focus-color: #974532;/*#3c4988;*/
+    -jfx-focus-color: #4087c3;/*#3c4988;*/
     -fx-prompt-text-fill: #000000;
     -fx-prompt-text-weight: bold;
     
 }
+
 .jfx-texto-largo{
     -fx-min-width: 130;
     -fx-text-fill: #2f2f2f;
     -fx-font-size: 17;   
-    -jfx-focus-color: #005683;/*#3c4988;*/
+    -jfx-focus-color: #4087c3;/*#3c4988;*/
     -fx-prompt-text-fill: #b4b4b4;
     -fx-prompt-text-weight: bold;
 }
@@ -408,7 +425,7 @@ scroll-pane {
 }
 
 .jfx-combo-box{
-    -jfx-focus-color: #974532;
+    -jfx-focus-color: #4087c3;
     
 }
 
@@ -427,12 +444,25 @@ scroll-pane {
     -fx-text-fill: #000000;
 }
 
-.contInfo{
-    -fx-border-width: 2;
-    -fx-border-color: #292b2d;
-    -fx-max-height: 300px;
+.texto-cant .jfx-text-field{
+    -fx-max-width: 90;
+    
+    -fx-text-fill: #2f2f2f;
+    -fx-font-size: 17;   
+    -jfx-focus-color: #005683;/*#3c4988;*/
+    -fx-prompt-text-fill: #000000;
+    -fx-prompt-text-weight: bold;
 }
 
+.texto-cant{
+    -fx-background-color: #f0fdff;
+    -fx-border-width: 2;
+    -fx-border-color: #292b2d;
+    -fx-border-radius: 8pt;
+     -fx-background-radius: 8pt;
+     -fx-max-height: 300px;
+     -fx-min-width: 220px ;   
+}
 
 .tiempo{
     
@@ -457,42 +487,4 @@ scroll-pane {
     -fx-pref-height: 60;
     -fx-alignment: center;
     
-}
-
-
-.scroll-paneT {
-    /*-fx-base: #ffffff;*/
-    -fx-border-color: transparent;
-    -fx-background-color: #ffffff;  
-}
-
-.scroll-paneT .corner{
-     -fx-background-color: #dbdbdb/*#ededed;    */
-}
-
-.scroll-barT .track {
-    -fx-background-color: #dbdbdb/*#ededed;#3c3f41;   */
-}
-
-.scroll-barT .thumb {
-    -fx-background-radius: 5;
-    -fx-background-color: #4087c3; /*#565656;*/
-    -fx-border-width: 8;
-    -fx-background-insets: 2,0,0;
-}
-
-.scroll-barT  {
-    -fx-background-color: #ffffff;/*#ededed;*/
-    -fx-background-insets: 0,10,0,0;
-}
-
-.scroll-barT .increment-button .increment-arrow,
-.scroll-barT .decrement-button .decrement-arrow {
-    -fx-background-color: #dbdbdb;
-}
-
-.scroll-barT increment-arrow,
-.scroll-barT decrement-arrow{
-    -fx-background-color: #dbdbdb;
-    -fx-padding: -2;
 }

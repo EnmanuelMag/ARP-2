@@ -44,4 +44,12 @@ public class Constantes {
             FXCollections.observableArrayList("RECIBIDO (COMPLETO)", "PARCIALMENTE RECIBIDO", "PENDIENTE");
     public static final ObservableList<String> FILTRO_POR_PEDIDOS = 
             FXCollections.observableArrayList("TIPO DE CLIENTE", "CLIENTE");
+    public static final ObservableList<String> FILTRO_POR_FACTURAS = 
+            FXCollections.observableArrayList("NOMBRE CLIENTE", "FECHA");
+    public static final ObservableList<String> FILTRO_POR_CLIENTES = 
+            FXCollections.observableArrayList("NOMBRE CLIENTE");
+    public static final ObservableList<String> FILTRO_POR_PRODUCTO = 
+            FXCollections.observableArrayList("NOMBRE PRODUCTO","PROVEEDOR","TIPO");
+    public static final ObservableList<String> FILTRO_POR_PROVEEDORES = 
+            FXCollections.observableArrayList("NOMBRE");
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 18/08/2019 04:31:37 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.PedidoProducto" table="pedido_producto" catalog="frigoccdb" optimistic-lock="version">
+        <id name="pedidoProductoId" type="int">
+            <column name="pedido_producto_id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="pedido" class="modelo.Pedido" fetch="select">
+            <column name="pedido_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="producto" class="modelo.Producto" fetch="select">
+            <column name="producto_id" not-null="true" />
+        </many-to-one>
+        <property name="cantidad" type="int">
+            <column name="cantidad" not-null="true" />
+        </property>
+        <set name="ventas" table="venta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="pedido_producto_id" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Venta" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -12,6 +12,7 @@ import com.jfoenix.controls.JFXTextField;
 import static constantes.Constantes.ESPACIADO;
 import static constantes.Constantes.TEXTS;
 import constantes.Metodos;
+import controlador.DB;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -25,6 +26,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import modelo.Proveedor;
 
 /**
  *
@@ -34,6 +36,11 @@ public class PanelProveedorRegistro extends PanelGenerico{
     
     private JFXDialog diag;
     private boolean b;
+    JFXTextField nombre;
+    JFXTextField ruc;
+    JFXTextField ciudad;
+    JFXTextField direccion;
+    JFXTextField telefono;
     
     public PanelProveedorRegistro(Stage s,StackPane lastRoot, boolean b){
         super(s,lastRoot);
@@ -56,45 +63,38 @@ public class PanelProveedorRegistro extends PanelGenerico{
     public HBox crearFormulario(){
        
         
-        JFXTextField nombre = new JFXTextField();
+        nombre = new JFXTextField();
         nombre.setPromptText("Nombre");
         nombre.setMinWidth(TEXTS);
         nombre.setLabelFloat(true);
         
-        
-        
         HBox contRUC = new HBox();
-        contRUC.setMaxWidth(160);
-        contRUC.setAlignment(Pos.CENTER);
         
-        JFXTextField ruc = new JFXTextField();
+        
+        ruc = new JFXTextField();
         ruc.setPromptText("RUC");
+        ruc.setMinWidth(200);
         ruc.setLabelFloat(true);
-        contRUC.getChildren().add(ruc);
         
-        if(!b){
-            ImageView img = new ImageView(new Image("/recursos/iconos/lupa2.png"));
-                img.setFitHeight(45);
-                img.setFitWidth(45);
-                HBox contImagen = new HBox(img);
-                contImagen.setAlignment(Pos.CENTER);
-                contImagen.setOnMouseClicked(new ManejadorBuscarP(true));
-            contRUC.getChildren().add(contImagen);
-        }
         
-        VBox cont1 = new VBox(nombre, contRUC);
+        ciudad = new JFXTextField();
+        ciudad.setPromptText("Ciudad");
+        ciudad.setMinWidth(200);
+        ciudad.setLabelFloat(true);
+        
+        VBox cont1 = new VBox(nombre, ruc, ciudad);
         cont1.setSpacing(90);
         //cont1.setMaxWidth(400);
         cont1.setAlignment(Pos.TOP_LEFT);
         
-        JFXTextField direccion = new JFXTextField();
+        direccion = new JFXTextField();
         direccion.setPromptText("Dirección");
        
         direccion.setMinWidth(TEXTS);
         direccion.setPrefWidth(TEXTS);
         direccion.setLabelFloat(true);
         
-        JFXTextField telefono = new JFXTextField();
+        telefono = new JFXTextField();
         telefono.setPromptText("Teléfono");
         telefono.setMaxWidth(150);
         telefono.setLabelFloat(true);
@@ -109,6 +109,22 @@ public class PanelProveedorRegistro extends PanelGenerico{
         contMain.setAlignment(Pos.CENTER);
         
         JFXButton registrar = new JFXButton("Registrar");
+        registrar.setOnMouseClicked(e -> {
+            if(this.formularioLLeno()){
+                 Proveedor p = new Proveedor();
+            p.setCiudad(ciudad.getText());
+            p.setDireccion(direccion.getText());
+            p.setRazonSocial(nombre.getText());
+            p.setRuc(ruc.getText());
+            p.setTelefono(telefono.getText());
+            DB.agregar(p);
+            Metodos.dialogoMaterial(root, "Datos", "Se ha guardado nuevo proveedor", "Cerrar");
+            
+            }else{
+                Metodos.dialogoMaterial(root, "Datos", "Por favor llene todo el formulario", "Cerrar");
+            }
+           
+        });
         VBox c = new VBox(registrar);
         c.setAlignment(Pos.CENTER);
         border.setBottom(c);
@@ -117,8 +133,23 @@ public class PanelProveedorRegistro extends PanelGenerico{
         contRoot.setMaxHeight(200);
         contRoot.setAlignment(Pos.CENTER);
         contRoot.setSpacing(55);
+        contRoot.getStyleClass().add("contMain_");
         //contRoot.setMaxWidth(500);
-        return contRoot;
+        
+        HBox main = new HBox(contRoot);
+        main.setAlignment(Pos.CENTER);
+     
+        
+        return main;
+    }
+    
+    public boolean formularioLLeno(){
+        if(nombre.getText().equals("") || ruc.getText().equals("")
+                || telefono.getText().equals("")|| ciudad.getText().equals("")|| direccion.getText().equals("")){
+            return false;
+        }
+        return true;
+        
     }
     
     public class ManejadorBuscarP implements EventHandler{

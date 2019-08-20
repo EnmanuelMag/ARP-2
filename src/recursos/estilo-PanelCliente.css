@@ -11,6 +11,15 @@ and open the template in the editor.
    -fx-background-color: #fffbf9;
 }
 
+.contMain_{
+    -fx-background-color: #f4f2ff;
+    -fx-border-width: 2;
+    -fx-border-color: #4732a0;
+    -fx-border-radius: 8pt;
+    -fx-background-radius: 8pt;
+    -fx-padding: 65;
+}
+
 .contCategoria{
     -fx-border-width: 2;
     -fx-border-color: #292b2d;
@@ -83,8 +92,6 @@ scroll-pane {
     -fx-background-insets: 2,0,0;
 }
 
-
-
 .scroll-bar > .increment-button > .increment-arrow,
 .scroll-bar > .decrement-button > .decrement-arrow {
     -fx-background-color: #ffffff;
@@ -115,7 +122,7 @@ scroll-pane {
 
 .jfx-button {
      -jfx-button-type: RAISED;
-     -fx-background-color: #faf9ff;
+     -fx-background-color: #f3f0ff;
      -fx-border-color: #4732a0; 
      -fx-text-fill: #000000;
      -fx-font-size: 16;

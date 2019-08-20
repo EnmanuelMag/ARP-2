@@ -25,7 +25,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import sistema.Factura;
+import modelo.Factura;
+
 
 /**
  *
@@ -61,7 +62,7 @@ public class PanelReporteVentas extends PanelGenerico {
     public void setCenter(){
         VBox cGridOpciones=new VBox();
         cGridOpciones.setAlignment(Pos.CENTER);
-        cGridOpciones.setPrefWidth(stage.getMaxWidth());
+        //cGridOpciones.setPrefWidth(stage.getMaxWidth());
         gridOpciones=new GridPane();
         gridOpciones.setHgap(26);
         gridOpciones.setVgap(26);
@@ -110,7 +111,7 @@ public class PanelReporteVentas extends PanelGenerico {
             dPickerHasta.setDefaultColor(Color.web("ff0a00"));
             dPickerHasta.setPromptText("");
             JFXButton bConsulta=new JFXButton("Consultar");
-            gridOpciones.add(bConsulta,5,4);
+            //gridOpciones.add(bConsulta,5,4);
             g.addColumn(0,new Label("Desde"),dPickerDesde);
             g.addColumn(1,new Label("Hasta"),dPickerHasta);
             //g.addColumn(2,bConsulta);
@@ -123,16 +124,17 @@ public class PanelReporteVentas extends PanelGenerico {
                 stage.getScene().setRoot(sub.getRoot());
             });
             
-            Metodos.dialogoMaterial(root, "Seleccione un intervalo de fecha", g, bConsulta);
+            Metodos.dialogoMaterial(root, "Intervalo de fecha", g, bConsulta);
             
             });
         
         
         Label subtitulo=new Label("Escoja una opción :");
-        gridOpciones.addColumn(0,subtitulo, opcion1,opcion2,opcion3,opcion4);
+        cGridOpciones.getChildren().addAll(subtitulo, opcion1,opcion2,opcion3,opcion4);
+        cGridOpciones.setSpacing(35);
         
-        cGridOpciones.getChildren().add(gridOpciones);
-        ((BorderPane)super.getBorder()).setCenter(cGridOpciones);
+        cGridOpciones.setAlignment(Pos.CENTER);
+        ((BorderPane)super.getBorder()).setCenter(new StackPane(cGridOpciones));
     }
     
     public String getRutaCssFile(){

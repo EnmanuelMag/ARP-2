@@ -76,48 +76,24 @@ public class PanelInicio {
         
         JFXButton facturas = new JFXButton("");
         facturas.setPadding(BOTON);
-        //facturas.setBackground(new Background(new BackgroundImage(iconos.get("factura2B.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-          //BackgroundSize.DEFAULT)));
-        //facturas.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
         facturas.getStyleClass().add("jfx-button-factura");
         facturas.setOnAction(e -> {
-           
-            JFXButton registrar = new JFXButton("Registrar");
-            registrar.getStyleClass().add("jfx-button-subIncio"); 
-            registrar.setOnMouseClicked(new ManejadorRegistroFactura(true));
-            
-            JFXButton consultar = new JFXButton("Consultar");
-            consultar.getStyleClass().add("jfx-button-subIncio");
-            consultar.setOnMouseClicked(new ManejadorRegistroFactura(false));
-            
-            HBox cont = new HBox(registrar, consultar);
-            cont.setAlignment(Pos.CENTER);
-            cont.setSpacing(20);
-            dialogo = Metodos.dialogoMaterial(root, "Selecione una acción a realizar (Factura)", cont);
-    
+      
+            PanelFacturaPrincipal pR = new PanelFacturaPrincipal(pStage,root);
+            pStage.getScene().setRoot(pR.getRoot());  
         });
+         //facturas.setBackground(new Background(new BackgroundImage(iconos.get("factura2B.png"), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+          //BackgroundSize.DEFAULT)));
+        //facturas.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        
         
         JFXButton producto = new JFXButton("");
         producto.setPadding(BOTON);
         producto.getStyleClass().add("jfx-button-producto");
         producto.setOnAction(e -> {
             
-            JFXButton consultar = new JFXButton(" Consultar");
-            consultar.getStyleClass().add("jfx-button-subIncio");
-            consultar.setOnAction(new ManejadorRegistroProducto(false));
-            
-            JFXButton registrar = new JFXButton("Registrar");
-            registrar.getStyleClass().add("jfx-button-subIncio");
-            registrar.setOnAction(new ManejadorRegistroProducto(true));
-            
-            JFXButton modificar = new JFXButton("Modificar");
-            modificar.getStyleClass().add("jfx-button-subIncio");
-            modificar.setOnAction(new ManejadorRegistroProducto(false));
-            
-            HBox cont = new HBox(consultar, registrar, modificar);
-            cont.setAlignment(Pos.CENTER);
-            cont.setSpacing(20);
-            dialogo = Metodos.dialogoMaterial(root, "Selecione una acción a realizar (Producto)", cont);
+            PanelProductoPrincipal pR = new PanelProductoPrincipal(pStage,root);
+            pStage.getScene().setRoot(pR.getRoot());  
             
         });
           
@@ -125,20 +101,9 @@ public class PanelInicio {
         clientes.setPadding(BOTON);
         clientes.getStyleClass().add("jfx-button-clientes");
         clientes.setOnAction(e -> {
-           
-            JFXButton registrar = new JFXButton("Registrar");
-            registrar.getStyleClass().add("jfx-button-subIncio");
-            registrar.setOnAction(new ManejadorRegistroClientes(true));
-            
-            JFXButton modificar = new JFXButton("Modificar");
-            modificar.getStyleClass().add("jfx-button-subIncio");
-            modificar.setOnAction(new ManejadorRegistroClientes(false));
-            
-            HBox cont = new HBox(registrar, modificar);
-            cont.setAlignment(Pos.CENTER);
-            cont.setSpacing(20);
-            dialogo = Metodos.dialogoMaterial(root, "Selecione una acción a realizar (Cliente)", cont);
-            
+      
+            PanelClientePrincipal pR = new PanelClientePrincipal(pStage,root);
+            pStage.getScene().setRoot(pR.getRoot());  
         });
         
         JFXButton proveedores = new JFXButton("");
@@ -146,24 +111,19 @@ public class PanelInicio {
         proveedores.getStyleClass().add("jfx-button-proveedor");
         proveedores.setOnAction(e -> {
 
-            JFXButton registrar = new JFXButton("Registrar");
-            registrar.getStyleClass().add("jfx-button-subIncio");
-            registrar.setOnAction(new ManejadorRegistroProveedores(true));
-            
-            JFXButton modificar = new JFXButton("Modificar");
-            modificar.getStyleClass().add("jfx-button-subIncio");
-            modificar.setOnAction(new ManejadorRegistroProveedores(false));
-            
-            HBox cont = new HBox(registrar, modificar);
-            cont.setAlignment(Pos.CENTER);
-            cont.setSpacing(20);
-            dialogo = Metodos.dialogoMaterial(root, "Selecione una acción a realizar (Proveedores)", cont);
-            
+            PanelProveedorPrincipal pR = new PanelProveedorPrincipal(pStage,root);
+            pStage.getScene().setRoot(pR.getRoot());  
         });
         
         JFXButton inventario = new JFXButton("");
         inventario.setPadding(BOTON);
         inventario.getStyleClass().add("jfx-button-inventario");
+        inventario.setOnAction(e -> {
+
+            PanelInventarioPrincipal pR = new PanelInventarioPrincipal(pStage, root);
+            pStage.getScene().setRoot(pR.getRoot());
+            
+        });
         
         JFXButton pedidos = new JFXButton("");
         pedidos.setPadding(BOTON);

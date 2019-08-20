@@ -31,8 +31,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import sistema.Cliente;
-import sistema.Pedido;
+import modelo.Cliente;
+import modelo.Pedido;
 
 /**
  *
@@ -88,20 +88,7 @@ public class PanelBusquedaPedido extends PanelGenerico{
         return contMain;
     }
     
-    public LinkedList<Pedido> cargarPedidos(){
-        
-        LinkedList<Pedido> pedidosPorFacturar=new LinkedList<>();
-        
-        pedidosPorFacturar.add(new Pedido(new Cliente(1,"Josue Alexander","Cobos Salvador","0951749456"," "," "),LocalDate.now()));
-        
-        pedidosPorFacturar.add(new Pedido(new Cliente(2,"Josue Alexander","Cobos Salvador","0951749456"," "," "),LocalDate.now()));
-        
-        pedidosPorFacturar.add(new Pedido(new Cliente(3,"Josue Alexander","Cobos Salvador","0951749456"," "," "),LocalDate.now()));
-        
-        pedidosPorFacturar.add(new Pedido(new Cliente(4,"Josue Alexander","Cobos Salvador","0951749456"," "," "),LocalDate.now()));
-        
-        return pedidosPorFacturar;
-    }
+
     
     public LinkedList<VBox> cargarTarjetaPedidos(LinkedList<Pedido> pedidosPorFacturar){
         
@@ -129,7 +116,7 @@ public class PanelBusquedaPedido extends PanelGenerico{
             g.setVgap(20);
             g.setHgap(20);
             g.addColumn(0, new Label("Cédula"), new Label("Nombres"), new Label("Fecha"));
-            g.addColumn(1, new Label(p.getCliente().getCedula()) ,new Label(p.getCliente().getNombreCompleto()), new Label(p.getFecha().toString()));
+            //g.addColumn(1, new Label(p.getCliente().getCedula()) ,new Label(p.getCliente().getNombreCompleto()), new Label(p.getFecha().toString()));
             g.add(button,10,2);
             v.getChildren().add(g);
             pedidosTarjeta.add(v);
@@ -146,7 +133,7 @@ public class PanelBusquedaPedido extends PanelGenerico{
         cScroll.setSpacing(20);
         scroll.setContent(cScroll);
         
-        cScroll.getChildren().addAll(cargarTarjetaPedidos(cargarPedidos()));
+        //cScroll.getChildren().addAll(cargarTarjetaPedidos(cargarPedidos()));
         scroll.setContent(cScroll);
         scroll.setFitToWidth(true);
         
